@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
+import { connect } from 'react-redux';
+
 import MainLayout from 'layouts/MainLayout';
 import ProductsTable from 'components/ProductsTable';
 import ProductEditor from 'components/ProductEditor';
@@ -66,8 +68,12 @@ class Products extends Component {
             };
         });
     };
+    handleClickDeleteBtn = id => {
+        console.log(`usuwam item id:${id}`);
+    };
 
     render() {
+        const { products } = this.props;
         const { editorActive } = this.state;
         return (
             <MainLayout>
@@ -86,7 +92,11 @@ class Products extends Component {
                         </button>
                     </div>
                 </div>
-                <ProductsTable onClickEditBtn={this.handleClickEditBtn} />
+                <ProductsTable
+                    products={products}
+                    onClickEditBtn={this.handleClickEditBtn}
+                    onClickDeleteBtn={this.handleClickDeleteBtn}
+                />
                 <StyledProductEditor
                     active={editorActive}
                     className="bg-dark border-top border-white"
@@ -105,4 +115,8 @@ class Products extends Component {
     }
 }
 
-export default Products;
+const mapDispatchToProps = ({ Products }) => ({
+    products: Products.products,
+});
+
+export default connect(mapDispatchToProps)(Products);

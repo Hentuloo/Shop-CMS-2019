@@ -8,7 +8,12 @@ const Image = styled.img`
     }
 `;
 
-const ProductsTable = ({ className, onClickEditBtn }) => {
+const ProductsTable = ({
+    className,
+    onClickEditBtn,
+    onClickDeleteBtn,
+    products,
+}) => {
     return (
         <table className={`${className} table table-striped mt-4`}>
             <thead>
@@ -22,46 +27,33 @@ const ProductsTable = ({ className, onClickEditBtn }) => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <Image
-                            src="https://unsplash.it/200/200"
-                            alt="..."
-                            className="img-thumbnail img-fluid"
-                        />
-                    </td>
-                    <td>Mark</td>
-                    <td className="d-none d-md-table-cell">Otto</td>
-                    <td className="row align-content-center p-3 p-md-4">
-                        <button
-                            onClick={() => onClickEditBtn(2)}
-                            className=" btn btn-info py-1 px-3 mr-2"
-                        >
-                            <span className="fa fa-pencil mt-1 h4" />
-                        </button>
-                        <button className=" btn btn-info py-1 px-3">
-                            <span className="fa fa-trash mt-1 h4" />
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <Image
-                            src="https://unsplash.it/200/200"
-                            alt="..."
-                            className="img-thumbnail d-block mw-10"
-                        />
-                    </td>
-                    <td>Jacob</td>
-                    <td className="d-none d-md-table-cell">Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Larry</td>
-                    <td className="d-none d-md-table-cell">the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {products.map(({ id, image, name, amount }) => (
+                    <tr key={id}>
+                        <td>
+                            <Image
+                                src={image}
+                                alt={`obraz: ${name}`}
+                                className="img-thumbnail img-fluid"
+                            />
+                        </td>
+                        <td>{name}</td>
+                        <td className="d-none d-md-table-cell">{amount}</td>
+                        <td className="row align-content-center p-3 p-md-4">
+                            <button
+                                onClick={() => onClickEditBtn(id)}
+                                className=" btn btn-info py-1 px-3 mr-2"
+                            >
+                                <span className="fa fa-pencil mt-1 h4" />
+                            </button>
+                            <button
+                                onClick={() => onClickDeleteBtn(id)}
+                                className=" btn btn-info py-1 px-3"
+                            >
+                                <span className="fa fa-trash mt-1 h4" />
+                            </button>
+                        </td>
+                    </tr>
+                ))}
             </tbody>
         </table>
     );
