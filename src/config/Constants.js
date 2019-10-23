@@ -7,4 +7,7 @@ export default {
         blog: '/blog',
         comments: '/comments',
     },
+    DEFAULTS: {
+        img: 'https://unsplash.it/300/300',
+    },
 };

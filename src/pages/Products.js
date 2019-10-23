@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
 import { connect } from 'react-redux';
+import {
+    createProject as createProjectAction,
+    editProject as editProjectAction,
+    deleteProject as deleteProjectAction,
+} from 'store/actions';
 
 import MainLayout from 'layouts/MainLayout';
 import ProductsTable from 'components/ProductsTable';
 import ProductEditor from 'components/ProductEditor';
 
-const EditorButton = styled.button`
+const EditorBarButton = styled.button`
     position: fixed;
     right: 0%;
     top: 100px;
@@ -52,7 +57,7 @@ const StyledProductEditor = styled(ProductEditor)`
 class Products extends Component {
     state = {
         editorActive: false,
-        activeElement: null,
+        activeElement: undefined,
     };
 
     handleChangeFlagEditor = () => {
@@ -60,27 +65,62 @@ class Products extends Component {
             return { editorActive: !prevState.editorActive };
         });
     };
+
     handleClickEditBtn = id => {
         this.setState(prevState => {
             return {
                 editorActive: !prevState.editorActive,
-                activeElement: id && null,
+                activeElement: id || undefined,
             };
         });
     };
+
     handleClickDeleteBtn = id => {
-        console.log(`usuwam item id:${id}`);
+        const { deleteProject } = this.props;
+        return deleteProject(id);
+    };
+
+    handleProductEditorAccept = ({
+        id,
+        index,
+        image,
+        name,
+        amount,
+        details,
+    }) => {
+        const { createProject, editProject } = this.props;
+        this.handleChangeFlagEditor();
+        if (id) {
+            //edit product
+            return editProject({
+                id,
+                index,
+                image,
+                name,
+                amount,
+                details,
+            });
+        }
+        //create product
+        return createProject({
+            id: Math.floor(Math.random() * 100),
+            index,
+            image,
+            name,
+            amount,
+            details,
+        });
     };
 
     render() {
         const { products } = this.props;
-        const { editorActive } = this.state;
+        const { editorActive, activeElement } = this.state;
         return (
             <MainLayout>
                 <div className="row pt-3">
                     <div className="col-6 col-md-3">
                         <button
-                            onClick={this.handleClickEditBtn}
+                            onClick={() => this.handleClickEditBtn()}
                             type="button"
                             className="btn bg-light d-flex flex-column align-items-center"
                         >
@@ -100,23 +140,35 @@ class Products extends Component {
                 <StyledProductEditor
                     active={editorActive}
                     className="bg-dark border-top border-white"
+                    activeElement={products.find(
+                        ({ id }) => id === activeElement,
+                    )}
+                    submitAction={this.handleProductEditorAccept}
                 />
-                <EditorButton
+                <EditorBarButton
                     type="button"
-                    editorActive={editorActive}
-                    onClick={this.handleChangeFlagEditor}
+                    aria-hidden="true"
                     className={`${
                         editorActive ? 'btn-light' : 'btn-dark'
                     } btn fa fa-tasks`}
-                    aria-hidden="true"
-                ></EditorButton>
+                    editorActive={editorActive}
+                    onClick={this.handleChangeFlagEditor}
+                ></EditorBarButton>
             </MainLayout>
         );
     }
 }
 
-const mapDispatchToProps = ({ Products }) => ({
-    products: Products.products,
+const mapStateToProps = ({ Products }) => ({
+    products: Products,
 });
+const mapDispatchToProps = {
+    createProject: createProjectAction,
+    editProject: editProjectAction,
+    deleteProject: deleteProjectAction,
+};
 
-export default connect(mapDispatchToProps)(Products);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Products);

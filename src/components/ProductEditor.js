@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+
+import Constants from 'config/Constants';
 
 const TextareaGroup = styled.div`
     width: 80%;
@@ -16,68 +18,207 @@ const ImageWrapper = styled.div`
         max-height: 100%;
     }
 `;
+class ProductEditor extends Component {
+    state = {
+        id: null,
+        index: '',
+        name: '',
+        amount: '',
+        details: '',
+        imageSrc: '',
+        imageTitle: '',
+    };
+    componentDidUpdate(prevProps) {
+        const prevActiveElement = prevProps.activeElement;
+        const currentActiveElement = this.props.activeElement;
+        if (prevActiveElement !== currentActiveElement) {
+            if (currentActiveElement) {
+                const {
+                    id,
+                    index,
+                    image: { src, title },
+                    name,
+                    amount,
+                    details,
+                } = this.props.activeElement;
+                return this.setState({
+                    id,
+                    index,
+                    name,
+                    amount,
+                    details,
+                    imageSrc: src,
+                    imageTitle: title,
+                });
+            }
+            return this.setState({
+                id: null,
+                index: '',
+                image: '',
+                name: '',
+                amount: '',
+                details: '',
+                imageSrc: '',
+                imageTitle: '',
+            });
+        }
+    }
 
-const ProductEditor = ({ className }) => {
-    return (
-        <div className={`${className} text-white`}>
-            <ImageWrapper>
-                <img
-                    className="img-thumbnail"
-                    src="https://unsplash.it/300/300"
-                    alt="obrazek"
-                />
-            </ImageWrapper>
-            <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
-                <label className="py-2" htmlFor="indexOfProducts">
-                    Index:
-                </label>
-                <input
-                    min="1"
-                    max="999999"
-                    type="number"
-                    className="form-control number w-auto ml-2"
-                    id="indexOfProducts"
-                />
+    handleChangeValue = e => {
+        const { value, name } = e.target;
+
+        if (value !== this.state[name]) {
+            this.setState({ [[name]]: value });
+        }
+    };
+
+    handleSubmitAction = () => {
+        const { submitAction } = this.props;
+        const {
+            id,
+            index,
+            name,
+            amount,
+            details,
+            imageSrc,
+            imageTitle,
+        } = this.state;
+        submitAction({
+            id,
+            index,
+            image: { src: imageSrc, title: imageTitle },
+            name,
+            amount,
+            details,
+        });
+    };
+    render() {
+        const { className, activeElement } = this.props;
+        const {
+            index,
+            name,
+            amount,
+            details,
+            imageSrc,
+            imageTitle,
+        } = this.state;
+
+        return (
+            <div className={`${className} text-white`}>
+                <ImageWrapper
+                    data-toggle="collapse"
+                    role="button"
+                    data-target="#imageCollapse"
+                    aria-expanded="false"
+                    aria-controls="collapseExample"
+                >
+                    <img
+                        className="img-thumbnail"
+                        src={imageSrc || Constants.DEFAULTS.img}
+                        alt="obrazek"
+                    />
+                </ImageWrapper>
+                <div id="imageCollapse" className="collapse">
+                    <div className="text-center">
+                        <div>
+                            <label className="py-2" htmlFor="imageHref">
+                                img(href):
+                            </label>
+                            <input
+                                name="imageSrc"
+                                min="1"
+                                max="999999"
+                                type="text"
+                                className="form-control d-inline-block w-50 mx-auto"
+                                id="imageHref"
+                                value={imageSrc}
+                                onChange={this.handleChangeValue}
+                            />
+                        </div>
+                        <div>
+                            <label className="py-2" htmlFor="imageTitle">
+                                img(title):
+                            </label>
+                            <input
+                                name="imageTitle"
+                                min="1"
+                                max="999999"
+                                type="text"
+                                className="form-control d-inline-block w-50 mx-auto"
+                                id="imageTitle"
+                                value={imageTitle}
+                                onChange={this.handleChangeValue}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
+                    <label className="py-2" htmlFor="indexOfProducts">
+                        Index:
+                    </label>
+                    <input
+                        name="index"
+                        min="1"
+                        max="999999"
+                        type="number"
+                        className="form-control number w-auto ml-2"
+                        id="indexOfProducts"
+                        value={index}
+                        onChange={this.handleChangeValue}
+                    />
+                </div>
+                <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
+                    <label className="py-2" htmlFor="nameOfProducts">
+                        Name:
+                    </label>
+                    <input
+                        name="name"
+                        type="text"
+                        className="form-control w-auto ml-1"
+                        id="nameOfProducts"
+                        value={name}
+                        onChange={this.handleChangeValue}
+                    />
+                </div>
+                <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
+                    <label className="py-2" htmlFor="AmountOfProducts">
+                        Amount:
+                    </label>
+                    <input
+                        name="amount"
+                        min="1"
+                        max="999999"
+                        type="number"
+                        className="form-control number w-auto ml-2"
+                        id="AmountOfProducts"
+                        value={amount}
+                        onChange={this.handleChangeValue}
+                    />
+                </div>
+                <TextareaGroup className="form-group">
+                    <label htmlFor="textareaDetails">Details:</label>
+                    <textarea
+                        name="details"
+                        className="form-control"
+                        id="textareaDetails"
+                        rows="3"
+                        value={details}
+                        onChange={this.handleChangeValue}
+                    ></textarea>
+                </TextareaGroup>
+                <button
+                    type="button"
+                    className="btn btn-info d-block mx-auto mt-3 py-2 px-4"
+                    onClick={this.handleSubmitAction}
+                >
+                    {activeElement === undefined
+                        ? 'Create product'
+                        : 'Edit this product'}
+                </button>
             </div>
-            <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
-                <label className="py-2" htmlFor="nameOfProducts">
-                    Name:
-                </label>
-                <input
-                    type="text"
-                    placeholder="name of product"
-                    className="form-control w-auto ml-1"
-                    id="nameOfProducts"
-                />
-            </div>
-            <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
-                <label className="py-2" htmlFor="AmountOfProducts">
-                    Amount:
-                </label>
-                <input
-                    min="1"
-                    max="999999"
-                    type="number"
-                    className="form-control number w-auto ml-2"
-                    id="AmountOfProducts"
-                />
-            </div>
-            <TextareaGroup className="form-group">
-                <label htmlFor="textareaDetails">Details:</label>
-                <textarea
-                    className="form-control"
-                    id="textareaDetails"
-                    rows="3"
-                ></textarea>
-            </TextareaGroup>
-            <button
-                type="button"
-                className="btn btn-info d-block mx-auto mt-3 py-2 px-4"
-            >
-                Accept changes
-            </button>
-        </div>
-    );
-};
+        );
+    }
+}
 
 export default ProductEditor;

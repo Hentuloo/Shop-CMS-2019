@@ -1,10 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Constants from 'config/Constants';
+
 const Image = styled.img`
     width: 60px;
     @media ${({ theme }) => theme.mq.md} {
         width: 80px;
+    }
+    @media ${({ theme }) => theme.mq.lg} {
+        width: auto;
+        max-width: 120px;
     }
 `;
 
@@ -23,37 +29,47 @@ const ProductsTable = ({
                     <th scope="col" className="d-none d-md-table-cell">
                         Amount
                     </th>
-                    <th scope="col">Operations</th>
+                    <th scope="col" className="d-none d-lg-table-cell">
+                        Description
+                    </th>
+                    <th scope="col w-lg-25">Operations</th>
                 </tr>
             </thead>
             <tbody>
-                {products.map(({ id, image, name, amount }) => (
-                    <tr key={id}>
-                        <td>
-                            <Image
-                                src={image}
-                                alt={`obraz: ${name}`}
-                                className="img-thumbnail img-fluid"
-                            />
-                        </td>
-                        <td>{name}</td>
-                        <td className="d-none d-md-table-cell">{amount}</td>
-                        <td className="row align-content-center p-3 p-md-4">
-                            <button
-                                onClick={() => onClickEditBtn(id)}
-                                className=" btn btn-info py-1 px-3 mr-2"
-                            >
-                                <span className="fa fa-pencil mt-1 h4" />
-                            </button>
-                            <button
-                                onClick={() => onClickDeleteBtn(id)}
-                                className=" btn btn-info py-1 px-3"
-                            >
-                                <span className="fa fa-trash mt-1 h4" />
-                            </button>
-                        </td>
-                    </tr>
-                ))}
+                {products.map(
+                    ({ id, image: { src, title }, name, amount, details }) => (
+                        <tr key={id}>
+                            <td>
+                                <Image
+                                    src={src || Constants.DEFAULTS.img}
+                                    alt={`obraz: ${title}`}
+                                    className="img-thumbnail img-fluid align-middle"
+                                />
+                            </td>
+                            <td className="align-middle">{name}</td>
+                            <td className="d-none d-md-table-cell align-middle">
+                                {amount}
+                            </td>
+                            <td className="d-none d-lg-table-cell">
+                                {details}
+                            </td>
+                            <td className="row align-content-center align-middle p-3 p-md-4 px-lg-0">
+                                <button
+                                    onClick={() => onClickEditBtn(id)}
+                                    className=" btn btn-info py-1 px-3 mr-2"
+                                >
+                                    <span className="fa fa-pencil mt-1 h4" />
+                                </button>
+                                <button
+                                    onClick={() => onClickDeleteBtn(id)}
+                                    className=" btn btn-info py-1 px-3"
+                                >
+                                    <span className="fa fa-trash mt-1 h4" />
+                                </button>
+                            </td>
+                        </tr>
+                    ),
+                )}
             </tbody>
         </table>
     );
