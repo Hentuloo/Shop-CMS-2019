@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Constants from 'config/Constants';
+
 const ModalDialog = styled.div`
     max-width: 100%;
     top: 14%;
@@ -53,7 +55,7 @@ const ModalProvider = ({
                                 data-dismiss="modal"
                                 onClick={onClose}
                             >
-                                Close
+                                {Constants.en.TEXT.close}
                             </button>
                         </div>
                     </div>

@@ -11,6 +11,8 @@ import OrderDetails from 'components/OrderDetails';
 
 import OrderCardTemplate from 'templates/OrderCardTemplate';
 
+import Constants from 'config/Constants';
+
 const StyledOrderDetails = styled(OrderDetails)`
     position: fixed;
     width: 100vw;
@@ -154,7 +156,7 @@ class Orders extends Component {
                 >
                     <OrderCardTemplate
                         targetName="Waiting"
-                        cardName="Zamówienia oczekujące wysyłki:"
+                        cardName={Constants.en.TEXT.toSentWaiting}
                     >
                         <OrdersTable
                             items={ordersStatusGroups.toSend}
@@ -163,8 +165,7 @@ class Orders extends Component {
                     </OrderCardTemplate>
                     <OrderCardTemplate
                         targetName="Sended"
-                        cardName="Zamówienia oczekujące potwierdzenia
-                                (dostarczono):"
+                        cardName={Constants.en.TEXT.pendingConfirmation}
                     >
                         <OrdersTable
                             items={ordersStatusGroups.sended}
@@ -173,7 +174,7 @@ class Orders extends Component {
                     </OrderCardTemplate>
                     <OrderCardTemplate
                         targetName="Delivered"
-                        cardName=" Zakończone:"
+                        cardName={Constants.en.TEXT.delivered}
                     >
                         <OrdersTable
                             items={ordersStatusGroups.delivered}

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Constants from 'config/Constants';
+
 const OrdersTable = ({
     clickDetailsButton,
     clickDeleteOrder,
@@ -10,10 +12,10 @@ const OrdersTable = ({
             <thead className="bg-light">
                 <tr>
                     <th scope="col" className="px-0 px-md-3">
-                        P. List
+                        {Constants.en.TEXT.collProductList}
                     </th>
-                    <th scope="col">Order date</th>
-                    <th scope="col">Send details</th>
+                    <th scope="col">{Constants.en.TEXT.collOrderDate}</th>
+                    <th scope="col">{Constants.en.TEXT.collSendDetails}</th>
                 </tr>
             </thead>
             <tbody>

@@ -58,44 +58,44 @@ class Navigation extends Component {
                             <NavLink
                                 exact
                                 className="nav-link text-center px-md-0"
-                                to={Constants.PATHS.root.path}
+                                to={Constants.en.PATHS.root.path}
                             >
                                 <span
                                     className="fa fa-home float-md-left pr-4"
                                     aria-hidden="true"
                                 />
-                                <span>{Constants.PATHS.root.title}</span>
+                                <span>{Constants.en.PATHS.root.title}</span>
                             </NavLink>
                         </li>
                         <li className="nav-item h4">
                             <NavLink
                                 className="nav-link text-center px-md-0"
-                                to={Constants.PATHS.orders.path}
+                                to={Constants.en.PATHS.orders.path}
                             >
                                 <span
                                     className="fa fa-shopping-basket float-md-left pr-4"
                                     aria-hidden="true"
                                 />
-                                <span>{Constants.PATHS.orders.title}</span>
+                                <span>{Constants.en.PATHS.orders.title}</span>
                             </NavLink>
                         </li>
                         <li className="nav-item h4">
                             <NavLink
                                 className="nav-link text-center px-md-0"
-                                to={Constants.PATHS.products.path}
+                                to={Constants.en.PATHS.products.path}
                             >
                                 <span
                                     className="fa fa-th-list float-md-left pr-"
                                     aria-hidden="true"
                                 />
-                                <span>{Constants.PATHS.products.title}</span>
+                                <span>{Constants.en.PATHS.products.title}</span>
                             </NavLink>
                         </li>
                         <li className="nav-item h5">
                             <NavLink
                                 onClick={this.handleDisabledLink}
                                 className="nav-link text-center px-md-0 text-muted"
-                                to={Constants.PATHS.blog.path}
+                                to={Constants.en.PATHS.blog.path}
                                 data-toggle="popover"
                                 data-content="Coming soon!"
                             >
@@ -103,14 +103,14 @@ class Navigation extends Component {
                                     className="fa fa-book float-md-left pr-4 mt-md-1"
                                     aria-hidden="true"
                                 />
-                                <span>{Constants.PATHS.blog.title}</span>
+                                <span>{Constants.en.PATHS.blog.title}</span>
                             </NavLink>
                         </li>
                         <li className="nav-item h5">
                             <NavLink
                                 onClick={this.handleDisabledLink}
                                 className="nav-link text-center px-md-0 text-muted"
-                                to={Constants.PATHS.comments.path}
+                                to={Constants.en.PATHS.comments.path}
                                 data-toggle="popover"
                                 data-content="Coming soon!"
                             >
@@ -118,14 +118,14 @@ class Navigation extends Component {
                                     className="fa fa-comments-o float-md-left pr-3"
                                     aria-hidden="true"
                                 />
-                                <span>{Constants.PATHS.comments.title}</span>
+                                <span>{Constants.en.PATHS.comments.title}</span>
                             </NavLink>
                         </li>
                         <li className="nav-item h5">
                             <NavLink
                                 onClick={this.handleDisabledLink}
                                 className="nav-link text-center px-md-0 text-muted"
-                                to={Constants.PATHS.cmsSettings.path}
+                                to={Constants.en.PATHS.cmsSettings.path}
                                 data-toggle="popover"
                                 data-content="Coming soon!"
                             >
@@ -133,7 +133,9 @@ class Navigation extends Component {
                                     className="fa fa-sliders float-md-left pr-3"
                                     aria-hidden="true"
                                 />
-                                <span>{Constants.PATHS.cmsSettings.title}</span>
+                                <span>
+                                    {Constants.en.PATHS.cmsSettings.title}
+                                </span>
                             </NavLink>
                         </li>
                     </ul>

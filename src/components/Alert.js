@@ -49,7 +49,7 @@ class Alert extends Component {
         const { alertActive, alertType } = generalState;
 
         if (alertActive) {
-            const { type, text } = Constants.ALERTS[alertType];
+            const { type, text } = Constants.en.ALERTS[alertType];
             if (type) {
                 return (
                     <Wrapper

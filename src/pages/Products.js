@@ -13,6 +13,8 @@ import MainLayout from 'layouts/MainLayout';
 import ProductsTable from 'components/ProductsTable';
 import ProductEditor from 'components/ProductEditor';
 
+import Constants from 'config/Constants';
+
 const EditorBarButton = styled.button`
     position: fixed;
     right: 0%;
@@ -152,7 +154,7 @@ class Products extends Component {
                                 className="fa fa-plus display-1"
                                 aria-hidden="true"
                             />
-                            <span>Nowy produkt</span>
+                            <span>{Constants.en.TEXT.newProduct}</span>
                         </button>
                     </div>
                 </div>

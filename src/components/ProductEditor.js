@@ -117,7 +117,7 @@ class ProductEditor extends Component {
                 >
                     <img
                         className="img-thumbnail"
-                        src={imageSrc || Constants.DEFAULTS.img}
+                        src={imageSrc || Constants.en.DEFAULTS.img}
                         alt="obrazek"
                     />
                 </ImageWrapper>
@@ -125,7 +125,7 @@ class ProductEditor extends Component {
                     <div className="text-center">
                         <div>
                             <label className="py-2" htmlFor="imageHref">
-                                img(href):
+                                {Constants.en.TEXT.imgHref}
                             </label>
                             <input
                                 name="imageSrc"
@@ -140,7 +140,7 @@ class ProductEditor extends Component {
                         </div>
                         <div>
                             <label className="py-2" htmlFor="imageTitle">
-                                img(title):
+                                {Constants.en.TEXT.imgTitle}
                             </label>
                             <input
                                 name="imageTitle"
@@ -158,7 +158,7 @@ class ProductEditor extends Component {
 
                 <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
                     <label className="py-2" htmlFor="indexOfProducts">
-                        Index:
+                        {Constants.en.TEXT.index}
                     </label>
                     <input
                         name="index"
@@ -173,7 +173,7 @@ class ProductEditor extends Component {
                 </div>
                 <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
                     <label className="py-2" htmlFor="nameOfProducts">
-                        Name:
+                        {Constants.en.TEXT.name}
                     </label>
                     <input
                         name="name"
@@ -186,7 +186,7 @@ class ProductEditor extends Component {
                 </div>
                 <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
                     <label className="py-2" htmlFor="AmountOfProducts">
-                        Amount:
+                        {Constants.en.TEXT.Amount}
                     </label>
                     <input
                         name="amount"
@@ -200,7 +200,9 @@ class ProductEditor extends Component {
                     />
                 </div>
                 <TextareaGroup className="form-group">
-                    <label htmlFor="textareaDetails">Details:</label>
+                    <label htmlFor="textareaDetails">
+                        {Constants.en.TEXT.Details}
+                    </label>
                     <textarea
                         name="details"
                         className="form-control"
@@ -216,8 +218,8 @@ class ProductEditor extends Component {
                     onClick={this.handleSubmitAction}
                 >
                     {activeElement === undefined
-                        ? 'Create product'
-                        : 'Edit this product'}
+                        ? Constants.en.TEXT.buttonNew
+                        : Constants.en.TEXT.buttonEdit}
                 </button>
             </div>
         );

@@ -13,19 +13,19 @@ function Root() {
             <Switch>
                 <Route
                     exact
-                    path={Constants.PATHS.root.path}
+                    path={Constants.en.PATHS.root.path}
                     component={DashBoard}
                 />
                 <Route
-                    path={`${Constants.PATHS.orders.path}`}
+                    path={`${Constants.en.PATHS.orders.path}`}
                     component={Orders}
                 />
                 <Route
-                    path={`${Constants.PATHS.products.path}/:id`}
+                    path={`${Constants.en.PATHS.products.path}/:id`}
                     component={Products}
                 />
                 <Route
-                    path={Constants.PATHS.products.path}
+                    path={Constants.en.PATHS.products.path}
                     component={Products}
                 />
             </Switch>

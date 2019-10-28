@@ -11,36 +11,39 @@ const OrdersCount = ({ className, amountsOfOrders }) => {
     };
     return (
         <div className={`${className} card mt-3`}>
-            <div className="card-header">Dziś: 21-10-1019</div>
+            <div className="card-header">
+                {Constants.en.TEXT.today}
+                {new Date().toISOString().substring(0, 10)}
+            </div>
             <div className="card-body px-2">
                 <h3 className="card-title border-left border-width-3 border-primary h4 py-2 px-2">
-                    Ilość zamówień
+                    {Constants.en.TEXT.ordersNumber}
                 </h3>
                 <ul className="list-group active">
                     <li className="list-group-item d-flex justify-content-between align-items-center">
-                        Do wysłania:
+                        {Constants.en.TEXT.toSent}
                         <span className="badge badge-primary badge-pill">
                             {lengths.toSend}
                         </span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between align-items-center">
-                        Oczekujące potwierdzenia:
+                        {Constants.en.TEXT.pending}
                         <span className="badge badge-primary badge-pill">
                             {lengths.sended}
                         </span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between align-items-center">
-                        Dostarczono(ten miesiąc):
+                        {Constants.en.TEXT.delivered}
                         <span className="badge badge-primary badge-pill">
                             {lengths.delivered}
                         </span>
                     </li>
                 </ul>
                 <Link
-                    to={Constants.PATHS.orders.path}
+                    to={Constants.en.PATHS.orders.path}
                     className="btn btn-primary mt-3"
                 >
-                    Przejdź do zamówień
+                    {Constants.en.TEXT.goToOrdersButton}
                 </Link>
             </div>
         </div>

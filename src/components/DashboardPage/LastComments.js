@@ -1,11 +1,12 @@
 import React from 'react';
+import Constants from 'config/Constants';
 
 const LastComments = ({ className, comments }) => {
     if (comments.length) {
         return (
             <div className={`${className} mt-3 p-1 p-md-3 px-0`}>
                 <h3 className="mb-0 py-2 px-2 border-left border-width-3 border-info h4">
-                    Ostatnie komentarze:
+                    {Constants.en.TEXT.lastComments}
                 </h3>
                 {comments.map(
                     ({
@@ -35,7 +36,7 @@ const LastComments = ({ className, comments }) => {
                                         {content.slice(0, 150)}
                                         <a href={url} className="text-muted">
                                             {' '}
-                                            Read more...
+                                            {Constants.en.TEXT.readMore}
                                         </a>
                                     </>
                                 )}

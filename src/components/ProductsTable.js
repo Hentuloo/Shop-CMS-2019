@@ -26,17 +26,17 @@ const ProductsTable = ({
             <thead>
                 <tr>
                     <th scope="col" className="px-0 px-md-3">
-                        Image
+                        {Constants.en.TEXT.collImage}
                     </th>
-                    <th scope="col">Name</th>
+                    <th scope="col"> {Constants.en.TEXT.collName}</th>
                     <th scope="col" className="d-none d-md-table-cell">
-                        Amount
+                        {Constants.en.TEXT.collAmount}
                     </th>
                     <th scope="col" className="d-none d-lg-table-cell">
-                        Description
+                        {Constants.en.TEXT.collDescription}
                     </th>
                     <th scope="col" className="px-0 px-md-3">
-                        Operations
+                        {Constants.en.TEXT.collOperations}
                     </th>
                 </tr>
             </thead>
@@ -47,7 +47,7 @@ const ProductsTable = ({
                             <td className="px-0 px-md-3">
                                 <LazyLoad>
                                     <Image
-                                        src={src || Constants.DEFAULTS.img}
+                                        src={src || Constants.en.DEFAULTS.img}
                                         alt={`obraz: ${title}`}
                                         className="img-thumbnail img-fluid align-middle"
                                     />

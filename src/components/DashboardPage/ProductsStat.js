@@ -6,7 +6,9 @@ const ProductsStat = ({ className, products }) => {
     if (products.length) {
         return (
             <div className={`${className} card bg-light my-4`}>
-                <div className="card-header">Status produktów</div>
+                <div className="card-header">
+                    {Constants.en.TEXT.productStatus}
+                </div>
                 <ul className="list-group">
                     {products.map(({ id, amount, name }) => (
                         <li
@@ -19,27 +21,27 @@ const ProductsStat = ({ className, products }) => {
 
                             {amount === 0 && (
                                 <span className="badge badge-danger ml-2 ml-md-4 px-2 py-2">
-                                    Empty
+                                    {Constants.en.TEXT.emptyStatus}
                                 </span>
                             )}
                             {amount === 1 && (
                                 <span className="badge badge-warning ml-2 ml-md-4 px-2 py-2">
-                                    Last
+                                    {Constants.en.TEXT.lastStatus}
                                 </span>
                             )}
                             {amount === 2 && (
                                 <span className="badge badge-warning ml-2 ml-md-4 px-2 py-2">
-                                    2-last
+                                    {Constants.en.TEXT.twoLastStatus}
                                 </span>
                             )}
 
                             <Link
                                 className="fa fa-pencil btn btn-outline-dark bg-white py-1 px-2 ml-auto text-dark"
                                 aria-hidden="true"
-                                to={`${Constants.PATHS.products.path}/${id}`}
+                                to={`${Constants.en.PATHS.products.path}/${id}`}
                             >
                                 <span className="absoluteHidden">
-                                    Edytuj przedmiot:
+                                    {Constants.en.TEXT.editItem}
                                 </span>
                             </Link>
                         </li>

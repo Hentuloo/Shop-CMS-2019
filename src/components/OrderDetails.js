@@ -114,7 +114,7 @@ class OrderDetails extends Component {
                                 >
                                     <img
                                         className="img-thumbnail"
-                                        src={src || Constants.DEFAULTS.img}
+                                        src={src || Constants.en.DEFAULTS.img}
                                         alt={title}
                                     />
                                 </ImageWrapper>
@@ -134,7 +134,7 @@ class OrderDetails extends Component {
                             className="mr-sm-2 sr-only"
                             htmlFor="inlineFormCustomSelect"
                         >
-                            Preference
+                            {Constants.en.TEXT.preference}
                         </label>
                         <select
                             name="status"
@@ -145,13 +145,21 @@ class OrderDetails extends Component {
                                 this.handleChangeValue(target, id)
                             }
                         >
-                            <option value="1">To send</option>
-                            <option value="2">Sented</option>
-                            <option value="3">Delivered</option>
+                            <option value="1">
+                                {Constants.en.TEXT.toSent}
+                            </option>
+                            <option value="2">
+                                {Constants.en.TEXT.sented}
+                            </option>
+                            <option value="3">
+                                {Constants.en.TEXT.delivered}
+                            </option>
                         </select>
                         <p className="mt-4 mb-0 h4">{address} </p>
                         <p className="mt-3 mb-0 h5 text-break">{email} </p>
-                        <p className="mt-4 mb-0 h5">Client comment: </p>
+                        <p className="mt-4 mb-0 h5">
+                            {Constants.en.TEXT.clientComment}
+                        </p>
                         <p className="mt-1 mb-0 p-2 h5 text-dark bg-light">
                             {clientComment}
                         </p>
@@ -167,7 +175,7 @@ class OrderDetails extends Component {
                 >
                     <img
                         className="img-thumbnail mh-70 cursor-pointer"
-                        src={modalSrc || Constants.DEFAULTS.img}
+                        src={modalSrc || Constants.en.DEFAULTS.img}
                         alt={modalTitle}
                         onClick={this.handleImageModalClose}
                     />
