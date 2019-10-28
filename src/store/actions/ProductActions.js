@@ -1,4 +1,4 @@
-export const Actions = {
+export const ProductActions = {
     CREATE_PROJECT: 'CREATE_PROJECT',
     EDIT_PROJECT: 'EDIT_PROJECT',
     DELETE_PROJECT: 'DELETE_PROJECT',
@@ -6,19 +6,19 @@ export const Actions = {
 
 export const createProject = project => dispatch => {
     dispatch({
-        type: Actions.CREATE_PROJECT,
+        type: ProductActions.CREATE_PROJECT,
         payload: project,
     });
 };
 export const editProject = project => dispatch => {
     dispatch({
-        type: Actions.EDIT_PROJECT,
+        type: ProductActions.EDIT_PROJECT,
         payload: project,
     });
 };
 export const deleteProject = id => dispatch => {
     dispatch({
-        type: Actions.DELETE_PROJECT,
+        type: ProductActions.DELETE_PROJECT,
         payload: { id },
     });
 };

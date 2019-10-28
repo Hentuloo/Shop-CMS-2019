@@ -104,13 +104,16 @@ class ProductEditor extends Component {
         } = this.state;
 
         return (
-            <div className={`${className} text-white`}>
+            <div
+                className={`${className} text-white overflow-auto pb-5 pb-md-2`}
+            >
                 <ImageWrapper
                     data-toggle="collapse"
                     role="button"
                     data-target="#imageCollapse"
                     aria-expanded="false"
                     aria-controls="collapseExample"
+                    className="cursor-pointer"
                 >
                     <img
                         className="img-thumbnail"

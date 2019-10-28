@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
+import { connect } from 'react-redux';
+import { changeStatus as changeStatusAction } from 'store/actions';
+import { deleteOrder as deleteOrderAction } from 'store/actions';
+
 import MainLayout from 'layouts/MainLayout';
 import OrdersTable from 'components/OrdersTable';
 import OrderDetails from 'components/OrderDetails';
@@ -36,58 +40,177 @@ const StyledOrderDetails = styled(OrderDetails)`
 
 class Orders extends Component {
     state = {
-        orderDetailActive: false,
+        orderDetailBarActive: false,
+        detailsBar: {
+            products: [],
+            id: null,
+            status: undefined,
+            address: '',
+            clientComment: '',
+            date: '',
+            email: '',
+        },
     };
 
     handleChangeDetailFlag = () => {
-        console.log('XD');
         this.setState(prevState => {
-            return { orderDetailActive: !prevState.orderDetailActive };
+            return { orderDetailBarActive: !prevState.orderDetailBarActive };
         });
     };
+
+    handleOnChangeStatus = ({ status, id }) => {
+        const { changeStatus } = this.props;
+        changeStatus({ status, id });
+        this.setState({ orderDetailBarActive: false });
+    };
+    handleDeleteOrder = id => {
+        const { deleteOrder } = this.props;
+        deleteOrder({ id });
+    };
     handleDetailsButton = id => {
-        this.setState({ orderDetailActive: true });
+        const { orders, selectedProducts } = this.props;
+
+        const activeOrder = orders.find(order => order.id === id);
+
+        const orderedProducts = activeOrder.products.map(orderedProduct => {
+            return selectedProducts
+                .filter(product => product.id === orderedProduct.productId)
+                .map(({ id, image, name }) => ({
+                    id,
+                    image,
+                    name,
+                    amount: orderedProduct.amount,
+                }))[0];
+        });
+        const {
+            status,
+            address,
+            details: clientComment,
+            date,
+            email,
+        } = activeOrder;
+
+        this.setState({
+            orderDetailBarActive: true,
+            detailsBar: {
+                products: orderedProducts,
+                id,
+                status,
+                address,
+                clientComment,
+                date,
+                email,
+            },
+        });
     };
 
     render() {
-        const { orderDetailActive } = this.state;
+        const { orderDetailBarActive, detailsBar } = this.state;
+        const { orders, selectedProducts } = this.props;
+        const ordersStatusGroups = {
+            toSend: {
+                orders: orders.filter(order => order.status === 1),
+                products: selectedProducts.filter(product => {
+                    return orders.find(order => {
+                        return order.products.find(
+                            orderedProduct =>
+                                orderedProduct.productId === product.id &&
+                                order.status === 1,
+                        );
+                    });
+                }),
+            },
+            sended: {
+                orders: orders.filter(order => order.status === 2),
+                products: selectedProducts.filter(product => {
+                    return orders.find(order => {
+                        return order.products.find(
+                            orderedProduct =>
+                                orderedProduct.productId === product.id &&
+                                order.status === 2,
+                        );
+                    });
+                }),
+            },
+            delivered: {
+                orders: orders.filter(order => order.status === 3),
+                products: selectedProducts.filter(product => {
+                    return orders.find(order => {
+                        return order.products.find(
+                            orderedProduct =>
+                                orderedProduct.productId === product.id &&
+                                order.status === 3,
+                        );
+                    });
+                }),
+            },
+        };
+
         return (
             <MainLayout>
-                <div className="accordion mt-md-4" id="accordionExample">
+                <div
+                    className="accordion mt-md-4 pb-5 pb-mb-2"
+                    id="accordionExample"
+                >
                     <OrderCardTemplate
                         targetName="Waiting"
                         cardName="Zamówienia oczekujące wysyłki:"
                     >
                         <OrdersTable
+                            items={ordersStatusGroups.toSend}
                             clickDetailsButton={this.handleDetailsButton}
                         />
                     </OrderCardTemplate>
                     <OrderCardTemplate
-                        targetName="DeliveredStatus"
+                        targetName="Sended"
                         cardName="Zamówienia oczekujące potwierdzenia
                                 (dostarczono):"
                     >
                         <OrdersTable
+                            items={ordersStatusGroups.sended}
                             clickDetailsButton={this.handleDetailsButton}
                         />
                     </OrderCardTemplate>
                     <OrderCardTemplate
-                        targetName="Completed"
-                        cardName=" Zakończone(ten miesiąc):"
+                        targetName="Delivered"
+                        cardName=" Zakończone:"
                     >
                         <OrdersTable
+                            items={ordersStatusGroups.delivered}
                             clickDetailsButton={this.handleDetailsButton}
+                            clickDeleteOrder={this.handleDeleteOrder}
                         />
                     </OrderCardTemplate>
                 </div>
                 <StyledOrderDetails
                     onClose={this.handleChangeDetailFlag}
-                    active={orderDetailActive}
-                    className="bg-dark border-top border-white"
+                    onChangeStatus={this.handleOnChangeStatus}
+                    active={orderDetailBarActive}
+                    data={detailsBar}
+                    className="bg-dark border-top border-white pb-5"
                 />
             </MainLayout>
         );
     }
 }
 
-export default Orders;
+const mapStateToProps = ({ Orders, Products }) => ({
+    orders: Orders,
+    selectedProducts: Products.filter(product => {
+        return Orders.find(order => {
+            return order.products.find(
+                orderedProduct => orderedProduct.productId === product.id,
+            );
+        });
+    }),
+});
+
+const mapDispatchToProps = {
+    changeStatus: changeStatusAction,
+    deleteOrder: deleteOrderAction,
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Orders);

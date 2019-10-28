@@ -1,11 +1,25 @@
-import { Actions } from '../actions';
+import { ProductActions } from '../actions';
 
 const initialState = [
+    {
+        id: 22,
+        index: 44,
+        image: {
+            src:
+                'https://cdn.pixabay.com/photo/2017/06/25/19/50/sunset-2441776_960_720.jpg',
+            title: 'mój obrazek i przedmiot',
+        },
+        name: 'special product',
+        details:
+            'sssssssssssssssssssssssssssssssssssssssssssssssssssssss Lorem ipsum dolor sit amet conse informacje odnośne',
+        amount: 12,
+    },
     {
         id: 1,
         index: 1,
         image: {
-            src: 'https://unsplash.it/200/200',
+            src:
+                'https://cdn.pixabay.com/photo/2019/10/17/21/17/clown-4557864_960_720.jpg',
             title: 'Tytuł',
         },
         name: 'okulary wodoszczelne',
@@ -17,7 +31,8 @@ const initialState = [
         id: 2,
         index: 2,
         image: {
-            src: 'https://unsplash.it/200/200',
+            src:
+                'https://cdn.pixabay.com/photo/2019/08/28/14/24/tokyo-4436914_960_720.jpg',
             title: 'Tytuł',
         },
         name: 'okulary wodoszczelne',
@@ -29,7 +44,8 @@ const initialState = [
         id: 3,
         index: 3,
         image: {
-            src: 'https://unsplash.it/200/200',
+            src:
+                'https://cdn.pixabay.com/photo/2019/08/08/11/22/autumn-leaves-4392723_960_720.jpg',
             title: 'Tytuł',
         },
         name: 'okulary wodoszczelne',
@@ -41,7 +57,8 @@ const initialState = [
         id: 4,
         index: 4,
         image: {
-            src: 'https://unsplash.it/200/200',
+            src:
+                'https://cdn.pixabay.com/photo/2019/10/18/09/29/cat-4558651_960_720.jpg',
             title: 'Tytuł',
         },
         name: 'okulary wodoszczelne',
@@ -53,7 +70,8 @@ const initialState = [
         id: 5,
         index: 5,
         image: {
-            src: 'https://unsplash.it/200/200',
+            src:
+                'https://cdn.pixabay.com/photo/2019/08/13/02/03/night-4402380_960_720.jpg',
             title: 'Tytuł',
         },
         name: 'okulary wodoszczelne',
@@ -65,11 +83,10 @@ const initialState = [
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case Actions.CREATE_PROJECT: {
-            console.log(action);
+        case ProductActions.CREATE_PROJECT: {
             return [...state, action.payload];
         }
-        case Actions.EDIT_PROJECT: {
+        case ProductActions.EDIT_PROJECT: {
             return state.map(product => {
                 if (product.id === action.payload.id) {
                     return action.payload;
@@ -77,7 +94,7 @@ export default (state = initialState, action) => {
                 return product;
             });
         }
-        case Actions.DELETE_PROJECT: {
+        case ProductActions.DELETE_PROJECT: {
             return state.filter(product => product.id !== action.payload.id);
         }
         default:

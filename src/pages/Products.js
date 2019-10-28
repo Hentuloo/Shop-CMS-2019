@@ -6,6 +6,7 @@ import {
     createProject as createProjectAction,
     editProject as editProjectAction,
     deleteProject as deleteProjectAction,
+    setAlert as setAlertAction,
 } from 'store/actions';
 
 import MainLayout from 'layouts/MainLayout';
@@ -59,6 +60,22 @@ class Products extends Component {
         editorActive: false,
         activeElement: undefined,
     };
+    componentDidMount() {
+        // id from url params
+        const { id } = this.props.match.params;
+        if (id) {
+            const { products } = this.props;
+            const productById = products.find(
+                product => product.id === Number(id),
+            );
+            if (productById) {
+                this.setState({
+                    editorActive: true,
+                    activeElement: productById.id,
+                });
+            }
+        }
+    }
 
     handleChangeFlagEditor = () => {
         this.setState(prevState => {
@@ -76,7 +93,14 @@ class Products extends Component {
     };
 
     handleClickDeleteBtn = id => {
-        const { deleteProject } = this.props;
+        const { deleteProject, orderedProducts, setAlert } = this.props;
+        if (
+            orderedProducts.find(orderProducts =>
+                orderProducts.find(({ productId }) => productId === id),
+            )
+        ) {
+            return setAlert({ type: 'checkProductsInOrdersTab' });
+        }
         return deleteProject(id);
     };
 
@@ -133,6 +157,7 @@ class Products extends Component {
                     </div>
                 </div>
                 <ProductsTable
+                    className=""
                     products={products}
                     onClickEditBtn={this.handleClickEditBtn}
                     onClickDeleteBtn={this.handleClickDeleteBtn}
@@ -159,13 +184,15 @@ class Products extends Component {
     }
 }
 
-const mapStateToProps = ({ Products }) => ({
+const mapStateToProps = ({ Products, Orders }) => ({
     products: Products,
+    orderedProducts: Orders.map(({ products }) => products),
 });
 const mapDispatchToProps = {
     createProject: createProjectAction,
     editProject: editProjectAction,
     deleteProject: deleteProjectAction,
+    setAlert: setAlertAction,
 };
 
 export default connect(

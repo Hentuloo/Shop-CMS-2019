@@ -32,4 +32,10 @@ export default {
     DEFAULTS: {
         img: 'https://unsplash.it/300/300',
     },
+    ALERTS: {
+        checkProductsInOrdersTab: {
+            type: 'warning',
+            text: `That product is ordered check orders list and remove in "delivered" tab`,
+        },
+    },
 };

@@ -1,6 +1,10 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import GlobalStyles from 'themes/GlobalStyles';
+
 import Navigation from 'components/Navigation';
+import Alert from 'components/Alert';
+
 import theme from 'themes/mainTheme';
 
 const BreakDiv = styled.div`
@@ -19,6 +23,9 @@ const StyledNavigation = styled(Navigation)`
 const MainLayout = ({ children }) => {
     return (
         <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            <Alert />
+
             <div className="container mx-0 mw-100">
                 <div className="row">
                     <BreakDiv className="col-12 col-md-3 col-lg-2 h-1" />

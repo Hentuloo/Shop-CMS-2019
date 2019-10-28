@@ -1,64 +1,81 @@
 import React from 'react';
 
-const OrdersTable = ({ clickDetailsButton, type, items }) => {
+const OrdersTable = ({
+    clickDetailsButton,
+    clickDeleteOrder,
+    items: { orders, products },
+}) => {
     return (
         <table className="table">
             <thead className="bg-light">
                 <tr>
-                    <th scope="col">Product</th>
+                    <th scope="col" className="px-0 px-md-3">
+                        P. List
+                    </th>
                     <th scope="col">Order date</th>
                     <th scope="col">Send details</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>1</th>
-                    <td>Mark</td>
-                    <td>
-                        <button
-                            onClick={() => clickDetailsButton(1)}
-                            className=" btn btn-info py-0 px-2"
-                        >
-                            <span className="fa fa-address-card mt-1 h4" />
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th>2</th>
-                    <td>Jacob</td>
-                    <td>
-                        <button
-                            onClick={() => clickDetailsButton(2)}
-                            className=" btn btn-info py-0 px-2"
-                        >
-                            <span className="fa fa-address-card mt-1 h4" />
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th>3</th>
-                    <td>Larry</td>
-                    <td>
-                        <button
-                            onClick={() => clickDetailsButton(3)}
-                            className=" btn btn-info py-0 px-2"
-                        >
-                            <span className="fa fa-address-card mt-1 h4" />
-                        </button>
-                    </td>
-                </tr>
+                {orders &&
+                    orders.map(order => {
+                        const productsList = order.products.map(
+                            ({ productId, amount }) => {
+                                const { name } = products.find(
+                                    ({ id }) => id === productId,
+                                );
+                                return (
+                                    <li key={productId}>
+                                        {`${name} `}
+                                        <span className="font-weight-bold">{`Pieces: ${amount}`}</span>
+                                    </li>
+                                );
+                            },
+                        );
+
+                        return (
+                            <tr key={order.id}>
+                                <td className="px-0 px-md-3">
+                                    <ol className="pl-4 pl-md-5">
+                                        {productsList}
+                                    </ol>
+                                </td>
+                                <td>{order.date}</td>
+
+                                <td>
+                                    <button
+                                        onClick={() =>
+                                            clickDetailsButton(order.id)
+                                        }
+                                        className=" btn py-0 px-2"
+                                    >
+                                        {order.status === 1 && (
+                                            <span className="fa bg-info fa-address-card py-1 px-2 mt-0 h3 rounded" />
+                                        )}
+                                        {order.status === 2 && (
+                                            <span className="fa fa-question bg-warning py-1 px-3 mt-0 h3 rounded" />
+                                        )}
+                                        {order.status === 3 && (
+                                            <span className="fa fa-check bg-success py-1 px-2 mt-0 h3 rounded" />
+                                        )}
+                                    </button>
+                                    {clickDeleteOrder && (
+                                        <button
+                                            onClick={() =>
+                                                clickDeleteOrder(order.id)
+                                            }
+                                            className="btn py-0 px-2"
+                                        >
+                                            <span className="fa fa-trash bg-danger  py-1 px-2 mt-0 h3 rounded" />
+                                        </button>
+                                    )}
+                                </td>
+                            </tr>
+                        );
+                    })}
             </tbody>
         </table>
     );
 };
 
 export default OrdersTable;
-
-//  <button className=" btn btn-info py-0 px-2">
-// <span className="fa fa-address-card mt-1 h4" />
-// </button>
-// <span className="fa fa-question bg-warning py-1 px-3 mt-0 h3 rounded" />
-
-// <span className="fa fa-check bg-success py-1 px-2 mt-0 h3 rounded" />
-
-// <span className="fa fa-exclamation bg-danger py-1 px-3 mt-0 h3 rounded" />

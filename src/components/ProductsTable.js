@@ -24,7 +24,9 @@ const ProductsTable = ({
         <table className={`${className} table table-striped mt-4`}>
             <thead>
                 <tr>
-                    <th scope="col">Image</th>
+                    <th scope="col" className="px-0 px-md-3">
+                        Image
+                    </th>
                     <th scope="col">Name</th>
                     <th scope="col" className="d-none d-md-table-cell">
                         Amount
@@ -32,14 +34,16 @@ const ProductsTable = ({
                     <th scope="col" className="d-none d-lg-table-cell">
                         Description
                     </th>
-                    <th scope="col w-lg-25">Operations</th>
+                    <th scope="col" className="px-0 px-md-3">
+                        Operations
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 {products.map(
                     ({ id, image: { src, title }, name, amount, details }) => (
                         <tr key={id}>
-                            <td>
+                            <td className="px-0 px-md-3">
                                 <Image
                                     src={src || Constants.DEFAULTS.img}
                                     alt={`obraz: ${title}`}
@@ -53,16 +57,16 @@ const ProductsTable = ({
                             <td className="d-none d-lg-table-cell">
                                 {details}
                             </td>
-                            <td className="row align-content-center align-middle p-3 p-md-4 px-lg-0">
+                            <td className="row align-content-center align-middle p-1 p-md-3  p-md-4 px-lg-0">
                                 <button
                                     onClick={() => onClickEditBtn(id)}
-                                    className=" btn btn-info py-1 px-3 mr-2"
+                                    className=" btn btn-info py-1 px-2 px-md-3 mr-2"
                                 >
                                     <span className="fa fa-pencil mt-1 h4" />
                                 </button>
                                 <button
                                     onClick={() => onClickDeleteBtn(id)}
-                                    className=" btn btn-info py-1 px-3"
+                                    className=" btn btn-info py-1 px-2 px-md-3"
                                 >
                                     <span className="fa fa-trash mt-1 h4" />
                                 </button>
