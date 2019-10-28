@@ -1,4 +1,5 @@
 import React from 'react';
+import LazyLoad from 'react-lazyload';
 
 const RefferBlocks = ({ className, reffers }) => {
     if (reffers.length) {
@@ -13,11 +14,13 @@ const RefferBlocks = ({ className, reffers }) => {
                     }) => (
                         <div key={id} className="col-6 ">
                             <a href={href} className="btn bg-light mw-100">
-                                <img
-                                    className="mw-100"
-                                    src={src}
-                                    alt={imageTitle}
-                                />
+                                <LazyLoad>
+                                    <img
+                                        className="mw-100"
+                                        src={src}
+                                        alt={imageTitle}
+                                    />
+                                </LazyLoad>
                                 <h5 className="card-title text-uppercase">
                                     {title}
                                 </h5>

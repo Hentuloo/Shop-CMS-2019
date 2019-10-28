@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LazyLoad from 'react-lazyload';
 
 import Constants from 'config/Constants';
 
@@ -44,11 +45,13 @@ const ProductsTable = ({
                     ({ id, image: { src, title }, name, amount, details }) => (
                         <tr key={id}>
                             <td className="px-0 px-md-3">
-                                <Image
-                                    src={src || Constants.DEFAULTS.img}
-                                    alt={`obraz: ${title}`}
-                                    className="img-thumbnail img-fluid align-middle"
-                                />
+                                <LazyLoad>
+                                    <Image
+                                        src={src || Constants.DEFAULTS.img}
+                                        alt={`obraz: ${title}`}
+                                        className="img-thumbnail img-fluid align-middle"
+                                    />
+                                </LazyLoad>
                             </td>
                             <td className="align-middle">{name}</td>
                             <td className="d-none d-md-table-cell align-middle">
