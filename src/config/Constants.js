@@ -6,7 +6,7 @@ export default {
                 title: 'Home',
             },
             dashboard: {
-                path: '/',
+                path: '/dashboard',
                 title: 'Home',
             },
             orders: {
@@ -29,6 +29,18 @@ export default {
                 path: '/dashboard-settings',
                 title: 'Settings',
             },
+            register: {
+                path: '/register',
+                title: 'Register',
+            },
+            logout: {
+                path: '/login',
+                title: 'Logout',
+            },
+            login: {
+                path: '/login',
+                title: 'Login',
+            },
         },
         DEFAULTS: {
             img: 'https://unsplash.it/300/300',
@@ -41,6 +53,7 @@ export default {
         },
         TEXT: {
             close: 'Close',
+
             //orders
             today: 'Today: ',
             ordersNumber: 'Number of orders',
@@ -91,6 +104,13 @@ export default {
             //comments
             lastComments: 'Last comments:',
             readMore: 'Read more...',
+
+            //Auth page
+            demoInformation:
+                ' CMS dashboard panel is in the demo phase. You can try that application by logging into test account',
+            enterLogin: 'Enter login',
+            enterPassword: 'Enter password',
+            submitButton: 'SUBMIT',
         },
     },
 };

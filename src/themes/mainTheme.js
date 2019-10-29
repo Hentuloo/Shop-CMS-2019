@@ -4,5 +4,6 @@ export default {
         sm: '(min-width: 480px)',
         md: '(min-width: 768px)',
         lg: '(min-width: 1024px)',
+        vlg: '(min-width: 1494px)',
     },
 };

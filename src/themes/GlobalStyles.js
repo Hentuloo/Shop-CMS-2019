@@ -16,6 +16,9 @@ export default createGlobalStyle`
   .cursor-pointer{
   cursor: pointer;
 }
+.bg-transparent{
+   background-color: transparent !important;
+}
 .absoluteHidden{
    position: absolute;
     top: -9999px;

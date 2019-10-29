@@ -23,12 +23,12 @@ class Navigation extends Component {
         const { className } = this.props;
         return (
             <nav
-                className={`${className} navbar navbar-expand-md navbar-dark bg-dark  px-2`}
+                className={`${className} navbar navbar-expand-md navbar-dark bg-dark px-2`}
             >
                 <div className="text-light text-center w-md-100">
                     <Circle>
                         <span
-                            className="fa fa-user-o h3 float-md-left pr-4"
+                            className="fa fa-user-o h3 float-md-left pr-4 mt-1"
                             aria-hidden="true"
                         />
                     </Circle>
@@ -61,7 +61,7 @@ class Navigation extends Component {
                                 to={Constants.en.PATHS.root.path}
                             >
                                 <span
-                                    className="fa fa-home float-md-left pr-4"
+                                    className="fa fa-home float-md-left pr-4 mt-1"
                                     aria-hidden="true"
                                 />
                                 <span>{Constants.en.PATHS.root.title}</span>
@@ -73,7 +73,7 @@ class Navigation extends Component {
                                 to={Constants.en.PATHS.orders.path}
                             >
                                 <span
-                                    className="fa fa-shopping-basket float-md-left pr-4"
+                                    className="fa fa-shopping-basket float-md-left pr-4 mt-1"
                                     aria-hidden="true"
                                 />
                                 <span>{Constants.en.PATHS.orders.title}</span>
@@ -85,7 +85,7 @@ class Navigation extends Component {
                                 to={Constants.en.PATHS.products.path}
                             >
                                 <span
-                                    className="fa fa-th-list float-md-left pr-"
+                                    className="fa fa-th-list float-md-left pr-4"
                                     aria-hidden="true"
                                 />
                                 <span>{Constants.en.PATHS.products.title}</span>
@@ -100,7 +100,7 @@ class Navigation extends Component {
                                 data-content="Coming soon!"
                             >
                                 <span
-                                    className="fa fa-book float-md-left pr-4 mt-md-1"
+                                    className="fa fa-book float-md-left pr-4 mt-1 mt-md-1"
                                     aria-hidden="true"
                                 />
                                 <span>{Constants.en.PATHS.blog.title}</span>
@@ -136,6 +136,19 @@ class Navigation extends Component {
                                 <span>
                                     {Constants.en.PATHS.cmsSettings.title}
                                 </span>
+                            </NavLink>
+                        </li>
+                        <li className="nav-item h4 ">
+                            <NavLink
+                                exact
+                                className="nav-link text-center px-md-0"
+                                to={Constants.en.PATHS.logout.path}
+                            >
+                                <span
+                                    className="fa fa-sign-out float-md-left pr-4  mt-1"
+                                    aria-hidden="true"
+                                />
+                                <span>{Constants.en.PATHS.logout.title}</span>
                             </NavLink>
                         </li>
                     </ul>
