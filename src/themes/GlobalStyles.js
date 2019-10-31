@@ -24,4 +24,16 @@ export default createGlobalStyle`
     top: -9999px;
     left: -9999px;
 }
+.sticky-left{
+   left:0% !important;
+}
+.sticky-top{
+   top:0% !important;
+}
+.sticky-right{
+   right:0% !important;
+}
+.sticky-bottom{
+   bottom:0% !important;
+}
 `;

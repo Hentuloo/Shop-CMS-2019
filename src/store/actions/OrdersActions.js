@@ -1,17 +1,17 @@
-export const OrderActions = {
+export const orderActions = {
     CHANGE_STATUS: 'CHANGE_STATUS',
     DELETE_ORDER: 'DELETE_ORDER',
 };
 
 export const changeStatus = ({ id, status }) => dispatch => {
     dispatch({
-        type: OrderActions.CHANGE_STATUS,
+        type: orderActions.CHANGE_STATUS,
         payload: { id, status },
     });
 };
 export const deleteOrder = ({ id }) => dispatch => {
     dispatch({
-        type: OrderActions.DELETE_ORDER,
+        type: orderActions.DELETE_ORDER,
         payload: { id },
     });
 };

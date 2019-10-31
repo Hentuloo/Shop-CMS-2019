@@ -1,4 +1,4 @@
-import { OrderActions } from '../actions';
+import { orderActions } from '../actions';
 
 const initialState = [
     {
@@ -132,7 +132,7 @@ const initialState = [
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case OrderActions.CHANGE_STATUS: {
+        case orderActions.CHANGE_STATUS: {
             const { status, id } = action.payload;
             return state.map(order => {
                 if (order.id === id) {
@@ -141,7 +141,7 @@ export default (state = initialState, action) => {
                 return order;
             });
         }
-        case OrderActions.DELETE_ORDER: {
+        case orderActions.DELETE_ORDER: {
             const { id } = action.payload;
             return state.filter(order => order.id !== id);
         }

@@ -1,4 +1,4 @@
-// import { ProductActions } from '../actions';
+// import { productActions } from '../actions';
 
 const initialState = [
     {
@@ -67,7 +67,7 @@ const initialState = [
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        // case ProductActions.CREATE_PROJECT: {
+        // case productActions.CREATE_PROJECT: {
         //     return [...state, action.payload];
         // }
         default:

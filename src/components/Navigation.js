@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
+import { signOut as signOutAction } from 'store/actions';
+import { connect } from 'react-redux';
+
 import Constants from 'config/Constants';
 
 const Circle = styled.div`
@@ -20,7 +23,7 @@ class Navigation extends Component {
         e.preventDefault();
     };
     render() {
-        const { className } = this.props;
+        const { className, signOut } = this.props;
         return (
             <nav
                 className={`${className} navbar navbar-expand-md navbar-dark bg-dark px-2`}
@@ -143,6 +146,7 @@ class Navigation extends Component {
                                 exact
                                 className="nav-link text-center px-md-0"
                                 to={Constants.en.PATHS.logout.path}
+                                onClick={signOut}
                             >
                                 <span
                                     className="fa fa-sign-out float-md-left pr-4  mt-1"
@@ -158,4 +162,11 @@ class Navigation extends Component {
     }
 }
 
-export default Navigation;
+const mapDispatchToProps = {
+    signOut: signOutAction,
+};
+
+export default connect(
+    null,
+    mapDispatchToProps,
+)(Navigation);

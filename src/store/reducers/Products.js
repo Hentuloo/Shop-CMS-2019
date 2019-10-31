@@ -1,4 +1,4 @@
-import { ProductActions } from '../actions';
+import { productActions } from '../actions';
 
 const initialState = [
     {
@@ -83,10 +83,10 @@ const initialState = [
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case ProductActions.CREATE_PROJECT: {
+        case productActions.CREATE_PROJECT: {
             return [...state, action.payload];
         }
-        case ProductActions.EDIT_PROJECT: {
+        case productActions.EDIT_PROJECT: {
             return state.map(product => {
                 if (product.id === action.payload.id) {
                     return action.payload;
@@ -94,7 +94,7 @@ export default (state = initialState, action) => {
                 return product;
             });
         }
-        case ProductActions.DELETE_PROJECT: {
+        case productActions.DELETE_PROJECT: {
             return state.filter(product => product.id !== action.payload.id);
         }
         default:

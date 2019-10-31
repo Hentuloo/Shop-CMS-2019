@@ -1,7 +1,8 @@
-export * from './OrdersActions.js';
-export * from './ProductActions.js';
-export * from './GeneralActions.js';
+export * from './authActions.js';
+export * from './ordersActions.js';
+export * from './productActions.js';
+export * from './generalActions.js';
 
 // In future
-// export * from './SettingsActions.js';
-// export * from './CommentsActions.js';
+// export * from './settingsActions.js';
+// export * from './commentsActions.js';
