@@ -9,9 +9,6 @@ import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
 
-import * as Def from './actions/index';
-console.log(Def);
-
 export default createStore(
     rootReducer,
     compose(
