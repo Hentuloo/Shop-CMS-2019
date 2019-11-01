@@ -60,6 +60,7 @@ export const createProduct = product => async (
         //Math.floor(Math.random() * 100), //for dummy data
         return true;
     } catch (error) {
+        console.log(error);
         dispatch({
             type: productActions.CREATE_PRODUCT_FAILURE,
             payload: product,

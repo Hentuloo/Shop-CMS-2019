@@ -45,20 +45,19 @@ const ProductsTable = ({
             </thead>
             <tbody>
                 {products.map(
-                    ({
-                        id,
-                        image: { src, title },
-                        name,
-                        amount,
-                        details,
-                        price,
-                    }) => (
+                    ({ id, images, name, amount, details, price }) => (
                         <tr key={id}>
                             <td className="px-0 px-md-3">
                                 <LazyLoad>
                                     <Image
-                                        src={src || Constants.en.DEFAULTS.img}
-                                        alt={`obraz: ${title}`}
+                                        src={
+                                            (images.length > 0 &&
+                                                images[0].src) ||
+                                            Constants.en.DEFAULTS.img
+                                        }
+                                        alt={`obraz: ${images.length > 0 &&
+                                            images[0].title}`}
+                                        title={`${name}`}
                                         className="img-thumbnail img-fluid align-middle"
                                     />
                                 </LazyLoad>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 import Constants from 'config/Constants';
-import ModalProvider from './ModalProvider';
+import ModalProvider from 'components/ModalProvider';
 
 const ImagesWrapper = styled.div`
     display: grid;

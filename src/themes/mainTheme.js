@@ -1,4 +1,8 @@
 export default {
+    color: {
+        info: '#138496',
+        white: 'rgb(255, 255, 255)',
+    },
     mq: {
         xs: '(min-width: 0px)',
         sm: '(min-width: 480px)',

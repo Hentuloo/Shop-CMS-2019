@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Constants from 'config/Constants';
 
 const ProductsStat = ({ className, products }) => {
-    console.log(products);
     if (products.length) {
         return (
             <div className={`${className} card bg-light my-4`}>

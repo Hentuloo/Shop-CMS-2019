@@ -6,8 +6,7 @@ import { changeStatus as changeStatusAction } from 'store/actions';
 import { deleteOrder as deleteOrderAction } from 'store/actions';
 
 import MainLayout from 'layouts/MainLayout';
-import OrdersTable from 'components/OrdersTable';
-import OrderDetails from 'components/OrderDetails';
+import { OrdersTable, OrderDetails } from 'components/OrdersPage';
 
 import OrderCardTemplate from 'templates/OrderCardTemplate';
 

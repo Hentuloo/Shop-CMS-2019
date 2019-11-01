@@ -11,8 +11,7 @@ import {
 } from 'store/actions';
 
 import MainLayout from 'layouts/MainLayout';
-import ProductsTable from 'components/ProductsTable';
-import ProductEditor from 'components/ProductEditor';
+import { ProductsTable, ProductEditor } from 'components/ProductsPage';
 
 import Constants from 'config/Constants';
 
@@ -68,9 +67,7 @@ class Products extends Component {
         const { id } = this.props.match.params;
         if (id) {
             const { products } = this.props;
-            const productById = products.find(
-                product => product.id === Number(id),
-            );
+            const productById = products.find(product => product.id === id);
             if (productById) {
                 this.setState({
                     editorActive: true,
@@ -110,7 +107,7 @@ class Products extends Component {
     handleProductEditorAccept = async ({
         id,
         index,
-        image,
+        images,
         name,
         price,
         amount,
@@ -123,7 +120,7 @@ class Products extends Component {
             const callBackStatus = await editProduct({
                 id,
                 index,
-                image,
+                images,
                 name,
                 price,
                 amount,
@@ -135,7 +132,7 @@ class Products extends Component {
         //create product
         const callBackStatus = await createProduct({
             index,
-            image,
+            images,
             name,
             price,
             amount,

@@ -2,22 +2,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import Constants from 'config/Constants';
+import ImageController from './ImageController';
 
 const TextareaGroup = styled.div`
     width: 80%;
     margin: 0px auto;
 `;
 
-const ImageWrapper = styled.div`
-    width: 80%;
-    height: 100px;
-    margin: 10px auto;
-    text-align: center;
-    img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-`;
 class ProductEditor extends Component {
     state = {
         id: null,
@@ -26,8 +17,7 @@ class ProductEditor extends Component {
         price: '',
         amount: 1,
         details: '',
-        imageSrc: '',
-        imageTitle: '',
+        images: [],
     };
     componentDidUpdate(prevProps) {
         const prevActiveElement = prevProps.activeElement;
@@ -37,7 +27,7 @@ class ProductEditor extends Component {
                 const {
                     id,
                     index,
-                    image: { src, title },
+                    images,
                     name,
                     amount,
                     price,
@@ -50,20 +40,17 @@ class ProductEditor extends Component {
                     amount,
                     price,
                     details,
-                    imageSrc: src,
-                    imageTitle: title,
+                    images,
                 });
             }
             return this.setState({
                 id: null,
                 index: '',
-                image: '',
                 name: '',
                 price: '',
                 amount: '',
                 details: '',
-                imageSrc: '',
-                imageTitle: '',
+                images: [],
             });
         }
     }
@@ -72,92 +59,38 @@ class ProductEditor extends Component {
         const { value, name } = e.target;
 
         if (value !== this.state[name]) {
-            this.setState({ [[name]]: value });
+            this.setState({ [name]: value });
         }
     };
 
     handleSubmitAction = () => {
         const { submitAction } = this.props;
-        const {
-            id,
-            index,
-            name,
-            amount,
-            price,
-            details,
-            imageSrc,
-            imageTitle,
-        } = this.state;
+        const { id, index, name, amount, price, details, images } = this.state;
         submitAction({
             id,
             index,
-            image: { src: imageSrc, title: imageTitle },
+            images,
             name,
             amount,
             price,
             details,
         });
     };
+    updateImage = images => {
+        this.setState({ images });
+    };
+
     render() {
         const { className, activeElement } = this.props;
-        const {
-            index,
-            name,
-            amount,
-            price,
-            details,
-            imageSrc,
-            imageTitle,
-        } = this.state;
-
+        const { index, name, amount, price, details, images } = this.state;
         return (
             <div
                 className={`${className} text-white overflow-auto pb-5 pb-md-2`}
             >
-                <ImageWrapper
-                    data-toggle="collapse"
-                    role="button"
-                    data-target="#imageCollapse"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                    className="cursor-pointer"
-                >
-                    <img
-                        className="img-thumbnail"
-                        src={imageSrc || Constants.en.DEFAULTS.img}
-                        alt="obrazek"
-                    />
-                </ImageWrapper>
-                <div id="imageCollapse" className="collapse">
-                    <div className="text-center">
-                        <div>
-                            <label className="py-2" htmlFor="imageHref">
-                                {Constants.en.TEXT.imgHref}
-                            </label>
-                            <input
-                                name="imageSrc"
-                                type="text"
-                                className="form-control d-inline-block w-50 mx-auto"
-                                id="imageHref"
-                                value={imageSrc}
-                                onChange={this.handleChangeValue}
-                            />
-                        </div>
-                        <div>
-                            <label className="py-2" htmlFor="imageTitle">
-                                {Constants.en.TEXT.imgTitle}
-                            </label>
-                            <input
-                                name="imageTitle"
-                                type="text"
-                                className="form-control d-inline-block w-50 mx-auto"
-                                id="imageTitle"
-                                value={imageTitle}
-                                onChange={this.handleChangeValue}
-                            />
-                        </div>
-                    </div>
-                </div>
+                <ImageController
+                    updateImage={this.updateImage}
+                    images={images}
+                />
                 <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
                     <label className="py-2" htmlFor="indexOfProducts">
                         {Constants.en.TEXT.index}
