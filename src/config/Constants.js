@@ -87,6 +87,7 @@ export default {
             //products-table
             collImage: 'Image',
             collName: 'Name',
+            collPrice: 'Price:',
             collAmount: 'Amount',
             collDescription: 'Description',
             collOperations: 'Operations',
@@ -94,12 +95,14 @@ export default {
             //productsDetails
             index: 'index:',
             name: 'Name:',
-            Amount: 'Amount:',
+            price: 'Price:',
+            Amount: 'Available quantity:',
             Details: 'Details:',
             imgHref: 'img(href):',
             imgTitle: 'img(title):',
             buttonEdit: 'Edit this product',
             buttonNew: 'Create product',
+            monetaryType: '$(usd)',
 
             //comments
             lastComments: 'Last comments:',

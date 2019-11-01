@@ -28,7 +28,10 @@ const ProductsTable = ({
                     <th scope="col" className="px-0 px-md-3">
                         {Constants.en.TEXT.collImage}
                     </th>
-                    <th scope="col"> {Constants.en.TEXT.collName}</th>
+                    <th scope="col">{Constants.en.TEXT.collName}</th>
+                    <th scope="col" className="d-none d-md-table-cell">
+                        {Constants.en.TEXT.collPrice}
+                    </th>
                     <th scope="col" className="d-none d-md-table-cell">
                         {Constants.en.TEXT.collAmount}
                     </th>
@@ -42,7 +45,14 @@ const ProductsTable = ({
             </thead>
             <tbody>
                 {products.map(
-                    ({ id, image: { src, title }, name, amount, details }) => (
+                    ({
+                        id,
+                        image: { src, title },
+                        name,
+                        amount,
+                        details,
+                        price,
+                    }) => (
                         <tr key={id}>
                             <td className="px-0 px-md-3">
                                 <LazyLoad>
@@ -54,6 +64,10 @@ const ProductsTable = ({
                                 </LazyLoad>
                             </td>
                             <td className="align-middle">{name}</td>
+                            <td className="d-none d-md-table-cell align-middle">
+                                {price}
+                                {price && Constants.en.TEXT.monetaryType}
+                            </td>
                             <td className="d-none d-md-table-cell align-middle">
                                 {amount}
                             </td>

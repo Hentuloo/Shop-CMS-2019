@@ -112,6 +112,7 @@ class Products extends Component {
         index,
         image,
         name,
+        price,
         amount,
         details,
     }) => {
@@ -124,6 +125,7 @@ class Products extends Component {
                 index,
                 image,
                 name,
+                price,
                 amount,
                 details,
             });
@@ -135,6 +137,7 @@ class Products extends Component {
             index,
             image,
             name,
+            price,
             amount,
             details,
         });

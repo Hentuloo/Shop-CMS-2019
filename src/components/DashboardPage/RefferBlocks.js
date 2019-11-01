@@ -13,7 +13,12 @@ const RefferBlocks = ({ className, reffers }) => {
                         image: { src, title: imageTitle },
                     }) => (
                         <div key={id} className="col-6 ">
-                            <a href={href} className="btn bg-light mw-100">
+                            <a
+                                href={href}
+                                className="btn bg-light mw-100"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <LazyLoad>
                                     <img
                                         className="mw-100"

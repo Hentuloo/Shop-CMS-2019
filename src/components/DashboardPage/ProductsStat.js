@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Constants from 'config/Constants';
 
 const ProductsStat = ({ className, products }) => {
+    console.log(products);
     if (products.length) {
         return (
             <div className={`${className} card bg-light my-4`}>
@@ -19,17 +20,17 @@ const ProductsStat = ({ className, products }) => {
                                 {name}
                             </h4>
 
-                            {amount === 0 && (
+                            {Number(amount) === 0 && (
                                 <span className="badge badge-danger ml-2 ml-md-4 px-2 py-2">
                                     {Constants.en.TEXT.emptyStatus}
                                 </span>
                             )}
-                            {amount === 1 && (
+                            {Number(amount) === 1 && (
                                 <span className="badge badge-warning ml-2 ml-md-4 px-2 py-2">
                                     {Constants.en.TEXT.lastStatus}
                                 </span>
                             )}
-                            {amount === 2 && (
+                            {Number(amount) === 2 && (
                                 <span className="badge badge-warning ml-2 ml-md-4 px-2 py-2">
                                     {Constants.en.TEXT.twoLastStatus}
                                 </span>

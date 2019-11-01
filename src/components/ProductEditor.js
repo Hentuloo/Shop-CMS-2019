@@ -23,7 +23,8 @@ class ProductEditor extends Component {
         id: null,
         index: '',
         name: '',
-        amount: '',
+        price: '',
+        amount: 1,
         details: '',
         imageSrc: '',
         imageTitle: '',
@@ -39,6 +40,7 @@ class ProductEditor extends Component {
                     image: { src, title },
                     name,
                     amount,
+                    price,
                     details,
                 } = this.props.activeElement;
                 return this.setState({
@@ -46,6 +48,7 @@ class ProductEditor extends Component {
                     index,
                     name,
                     amount,
+                    price,
                     details,
                     imageSrc: src,
                     imageTitle: title,
@@ -56,6 +59,7 @@ class ProductEditor extends Component {
                 index: '',
                 image: '',
                 name: '',
+                price: '',
                 amount: '',
                 details: '',
                 imageSrc: '',
@@ -79,6 +83,7 @@ class ProductEditor extends Component {
             index,
             name,
             amount,
+            price,
             details,
             imageSrc,
             imageTitle,
@@ -89,6 +94,7 @@ class ProductEditor extends Component {
             image: { src: imageSrc, title: imageTitle },
             name,
             amount,
+            price,
             details,
         });
     };
@@ -98,6 +104,7 @@ class ProductEditor extends Component {
             index,
             name,
             amount,
+            price,
             details,
             imageSrc,
             imageTitle,
@@ -129,8 +136,6 @@ class ProductEditor extends Component {
                             </label>
                             <input
                                 name="imageSrc"
-                                min="1"
-                                max="999999"
                                 type="text"
                                 className="form-control d-inline-block w-50 mx-auto"
                                 id="imageHref"
@@ -144,8 +149,6 @@ class ProductEditor extends Component {
                             </label>
                             <input
                                 name="imageTitle"
-                                min="1"
-                                max="999999"
                                 type="text"
                                 className="form-control d-inline-block w-50 mx-auto"
                                 id="imageTitle"
@@ -155,7 +158,6 @@ class ProductEditor extends Component {
                         </div>
                     </div>
                 </div>
-
                 <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
                     <label className="py-2" htmlFor="indexOfProducts">
                         {Constants.en.TEXT.index}
@@ -183,6 +185,24 @@ class ProductEditor extends Component {
                         value={name}
                         onChange={this.handleChangeValue}
                     />
+                </div>
+                <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
+                    <label className="py-2" htmlFor="priceOfProduct">
+                        {Constants.en.TEXT.price}
+                    </label>
+                    <input
+                        name="price"
+                        min="1"
+                        step="any"
+                        type="number"
+                        className="form-control number w-auto ml-2"
+                        id="priceOfProduct"
+                        value={price}
+                        onChange={this.handleChangeValue}
+                    />
+                    <span className="py-2">
+                        {Constants.en.TEXT.monetaryType}
+                    </span>
                 </div>
                 <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
                     <label className="py-2" htmlFor="AmountOfProducts">

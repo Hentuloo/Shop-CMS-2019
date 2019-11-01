@@ -5,7 +5,8 @@ const initialState = {
         {
             id: 123,
             title: 'Analytics',
-            href: '#example',
+            href:
+                'https://accounts.google.com/ServiceLogin?service=analytics&passive=1209600&continue=https://analytics.google.com/analytics/web/%23&followup=https://analytics.google.com/analytics/web/',
             image: {
                 src:
                     'https://cdn.pixabay.com/photo/2016/06/03/13/57/digital-marketing-1433427_960_720.jpg',
@@ -15,7 +16,7 @@ const initialState = {
         {
             id: 155,
             title: 'Facebook group',
-            href: '#example',
+            href: 'https://www.facebook.com/groups',
             image: {
                 src:
                     'https://cdn.pixabay.com/photo/2016/08/02/12/36/facebook-1563273_960_720.jpg',
@@ -25,7 +26,7 @@ const initialState = {
         {
             id: 14,
             title: 'YouTube',
-            href: '#example',
+            href: 'https://www.youtube.com',
             image: {
                 src:
                     'https://cdn.pixabay.com/photo/2015/01/05/17/19/film-589491_960_720.jpg',
