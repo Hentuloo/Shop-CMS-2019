@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import Constants from 'config/Constants';
 import ModalProvider from './ModalProvider';
@@ -163,7 +164,9 @@ class OrderDetails extends Component {
                         <p className="mt-1 mb-0 p-2 h5 text-dark bg-light">
                             {clientComment}
                         </p>
-                        <p className="mt-2 mb-0 h5">{date}</p>
+                        <p className="mt-2 mb-0 h5">
+                            {moment(date.data).calendar()}
+                        </p>
                     </div>
                 </div>
                 <ModalProvider

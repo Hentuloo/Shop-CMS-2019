@@ -3,10 +3,11 @@ import styled, { css } from 'styled-components';
 
 import { connect } from 'react-redux';
 import {
-    createProject as createProjectAction,
-    editProject as editProjectAction,
-    deleteProject as deleteProjectAction,
+    createProduct as createProductAction,
+    editProduct as editProductAction,
+    deleteProduct as deleteProductAction,
     setAlert as setAlertAction,
+    fetchProducts as fetchProductsAction,
 } from 'store/actions';
 
 import MainLayout from 'layouts/MainLayout';
@@ -63,7 +64,7 @@ class Products extends Component {
         activeElement: undefined,
     };
     componentDidMount() {
-        // id from url params
+        // id from url-params
         const { id } = this.props.match.params;
         if (id) {
             const { products } = this.props;
@@ -95,7 +96,7 @@ class Products extends Component {
     };
 
     handleClickDeleteBtn = id => {
-        const { deleteProject, orderedProducts, setAlert } = this.props;
+        const { deleteProduct, orderedProducts, setAlert } = this.props;
         if (
             orderedProducts.find(orderProducts =>
                 orderProducts.find(({ productId }) => productId === id),
@@ -103,10 +104,10 @@ class Products extends Component {
         ) {
             return setAlert({ type: 'checkProductsInOrdersTab' });
         }
-        return deleteProject(id);
+        return deleteProduct(id);
     };
 
-    handleProductEditorAccept = ({
+    handleProductEditorAccept = async ({
         id,
         index,
         image,
@@ -114,11 +115,11 @@ class Products extends Component {
         amount,
         details,
     }) => {
-        const { createProject, editProject } = this.props;
-        this.handleChangeFlagEditor();
+        const { createProduct, editProduct } = this.props;
+
         if (id) {
             //edit product
-            return editProject({
+            const callBackStatus = await editProduct({
                 id,
                 index,
                 image,
@@ -126,16 +127,19 @@ class Products extends Component {
                 amount,
                 details,
             });
+            if (callBackStatus) this.handleChangeFlagEditor();
+            return;
         }
         //create product
-        return createProject({
-            id: Math.floor(Math.random() * 100),
+        const callBackStatus = await createProduct({
             index,
             image,
             name,
             amount,
             details,
         });
+        if (callBackStatus) this.handleChangeFlagEditor();
+        return;
     };
 
     render() {
@@ -187,14 +191,15 @@ class Products extends Component {
 }
 
 const mapStateToProps = ({ Products, Orders }) => ({
-    products: Products,
-    orderedProducts: Orders.map(({ products }) => products),
+    products: Products.products,
+    orderedProducts: Orders.orders.map(({ products }) => products),
 });
 const mapDispatchToProps = {
-    createProject: createProjectAction,
-    editProject: editProjectAction,
-    deleteProject: deleteProjectAction,
+    createProduct: createProductAction,
+    editProduct: editProductAction,
+    deleteProduct: deleteProductAction,
     setAlert: setAlertAction,
+    fetchProducts: fetchProductsAction,
 };
 
 export default connect(

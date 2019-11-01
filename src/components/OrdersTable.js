@@ -1,5 +1,7 @@
 import React from 'react';
 
+import moment from 'moment';
+
 import Constants from 'config/Constants';
 
 const OrdersTable = ({
@@ -42,8 +44,7 @@ const OrdersTable = ({
                                         {productsList}
                                     </ol>
                                 </td>
-                                <td>{order.date}</td>
-
+                                <td>{moment(order.date.data).calendar()}</td>
                                 <td>
                                     <button
                                         onClick={() =>

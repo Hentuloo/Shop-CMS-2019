@@ -2,7 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { getFirebase } from 'react-redux-firebase';
-import { getFirestore } from 'redux-firestore';
+import { getFirestore, reduxFirestore } from 'redux-firestore';
+import fbConfig from 'config/fbConfig';
 
 import thunk from 'redux-thunk';
 
@@ -15,6 +16,7 @@ export default createStore(
             applyMiddleware(
                 thunk.withExtraArgument({ getFirebase, getFirestore }),
             ),
+            reduxFirestore(fbConfig),
         ),
     ),
 );

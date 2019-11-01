@@ -38,17 +38,19 @@ const DashBoard = ({
 };
 
 const mapStateToProps = ({ Orders, Products, Comments, Settings }) => ({
-    amountsOfOrders: Orders.map(order => ({ status: order.status })),
-    lastsProducts: Products.filter(({ amount }) => amount <= 2).map(
-        ({ id, amount, name }) => ({ id, amount, name }),
-    ),
-    lastsComments: Comments.slice(0, 2).map(comment => ({
-        ...comment,
-        content: {
-            ...comment.content,
-            childrens: comment.content.childrens.slice(0, 2),
-        },
-    })),
+    amountsOfOrders: Orders.orders.map(order => ({ status: order.status })),
+    lastsProducts: Products.products
+        .filter(({ amount }) => amount <= 2)
+        .map(({ id, amount, name }) => ({ id, amount, name })),
+    lastsComments:
+        Orders.orders.length > 2 &&
+        Comments.slice(0, 2).map(comment => ({
+            ...comment,
+            content: {
+                ...comment.content,
+                childrens: comment.content.childrens.slice(0, 2),
+            },
+        })),
     reffers: Settings.reffers,
 });
 

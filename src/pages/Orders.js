@@ -60,10 +60,10 @@ class Orders extends Component {
         });
     };
 
-    handleOnChangeStatus = ({ status, id }) => {
+    handleOnChangeStatus = async ({ status, id }) => {
         const { changeStatus } = this.props;
-        changeStatus({ status, id });
-        this.setState({ orderDetailBarActive: false });
+        const changed = await changeStatus({ status, id });
+        if (changed) return this.setState({ orderDetailBarActive: false });
     };
     handleDeleteOrder = id => {
         const { deleteOrder } = this.props;
@@ -147,7 +147,6 @@ class Orders extends Component {
                 }),
             },
         };
-
         return (
             <MainLayout>
                 <div
@@ -196,9 +195,9 @@ class Orders extends Component {
 }
 
 const mapStateToProps = ({ Orders, Products }) => ({
-    orders: Orders,
-    selectedProducts: Products.filter(product => {
-        return Orders.find(order => {
+    orders: Orders.orders,
+    selectedProducts: Products.products.filter(product => {
+        return Orders.orders.find(order => {
             return order.products.find(
                 orderedProduct => orderedProduct.productId === product.id,
             );
