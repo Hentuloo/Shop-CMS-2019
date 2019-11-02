@@ -11,12 +11,12 @@ import Settings from './Settings';
 import Auth from './Auth';
 
 export default combineReducers({
-    General,
-    Orders,
-    Products,
-    Comments,
-    Settings,
-    Auth,
-    firestore: firestoreReducer,
-    firebase: firebaseReducer,
+  General,
+  Orders,
+  Products,
+  Comments,
+  Settings,
+  Auth,
+  firestore: firestoreReducer,
+  firebase: firebaseReducer,
 });

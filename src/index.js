@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
-import Popper from 'popper.js';
+import 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import React from 'react';
@@ -15,30 +15,30 @@ import fbConfig from 'config/fbConfig';
 
 import Root from './Root';
 
-//Enable popovers
-$(function() {
-    $('[data-toggle="popover"]').popover({
-        container: 'body',
-    });
+// Enable popovers
+$(() => {
+  $('[data-toggle="popover"]').popover({
+    container: 'body',
+  });
 });
 
 const rrfConfig = {
-    userProfile: 'users',
-    useFirestoreForProfile: true,
+  userProfile: 'users',
+  useFirestoreForProfile: true,
 };
 
 const rrfProps = {
-    firebase: fbConfig,
-    config: rrfConfig,
-    dispatch: store.dispatch,
-    createFirestoreInstance,
+  firebase: fbConfig,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance,
 };
 
 ReactDOM.render(
-    <Provider store={store}>
-        <ReactReduxFirebaseProvider {...rrfProps}>
-            <Root />
-        </ReactReduxFirebaseProvider>
-    </Provider>,
-    document.getElementById('root'),
+  <Provider store={store}>
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <Root />
+    </ReactReduxFirebaseProvider>
+  </Provider>,
+  document.getElementById('root'),
 );

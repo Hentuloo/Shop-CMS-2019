@@ -10,13 +10,13 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
 export default createStore(
-    rootReducer,
-    compose(
-        composeWithDevTools(
-            applyMiddleware(
-                thunk.withExtraArgument({ getFirebase, getFirestore }),
-            ),
-            reduxFirestore(fbConfig),
-        ),
+  rootReducer,
+  compose(
+    composeWithDevTools(
+      applyMiddleware(
+        thunk.withExtraArgument({ getFirebase, getFirestore }),
+      ),
+      reduxFirestore(fbConfig),
     ),
+  ),
 );
