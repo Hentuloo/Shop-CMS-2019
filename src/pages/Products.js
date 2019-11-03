@@ -100,6 +100,10 @@ class Products extends Component {
     });
   };
 
+  handleClickNewBtn = () => {
+    this.setState({ editorActive: true, activeElement: undefined });
+  };
+
   handleClickDeleteBtn = id => {
     const { deleteProduct, orderedProducts, setAlert } = this.props;
     if (
@@ -157,7 +161,7 @@ class Products extends Component {
         <div className="row pt-3">
           <div className="col-6 col-md-3">
             <button
-              onClick={() => this.handleClickEditBtn()}
+              onClick={() => this.handleClickNewBtn()}
               type="button"
               className="btn bg-light d-flex flex-column align-items-center"
             >
@@ -215,7 +219,10 @@ Products.propTypes = {
   createProduct: PropTypes.func.isRequired,
   editProduct: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.object),
-  orderedProducts: PropTypes.arrayOf(PropTypes.object),
+  orderedProducts: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]),
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.number,

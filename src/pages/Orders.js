@@ -87,9 +87,12 @@ class Orders extends Component {
       orderedProduct => {
         return selectedProducts
           .filter(product => product.id === orderedProduct.productId)
-          .map(({ id: productId, image, name }) => ({
+          .map(({ id: productId, images, name }) => ({
             id: productId,
-            image,
+            image: {
+              src: images[0].src,
+              title: images[0].title,
+            },
             name,
             amount: orderedProduct.amount,
           }))[0];

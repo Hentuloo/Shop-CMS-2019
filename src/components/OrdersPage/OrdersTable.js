@@ -78,12 +78,14 @@ const OrdersTable = ({
   );
 };
 OrdersTable.propTypes = {
-  clickDetailsButton: PropTypes.func.isRequired,
-  clickDeleteOrder: PropTypes.func.isRequired,
+  clickDetailsButton: PropTypes.func,
+  clickDeleteOrder: PropTypes.func,
   items: PropTypes.oneOfType([PropTypes.object]),
 };
 OrdersTable.defaultProps = {
   items: null,
+  clickDetailsButton: null,
+  clickDeleteOrder: null,
 };
 
 export default OrdersTable;

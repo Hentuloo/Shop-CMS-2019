@@ -66,9 +66,20 @@ export default (state = initialState, action) => {
         orders: state.orders.filter(order => order.id !== id),
       };
     }
+    case orderActions.CREATE_ORDER: {
+      return state;
+    }
+    case orderActions.CREATE_ORDER_SUCCESS: {
+      return {
+        ...state,
+        errorMessage: null,
+        products: [...state.orders, action.payload],
+      };
+    }
 
     case orderActions.DELETE_ORDER_FAILURE:
     case orderActions.CHANGE_STATUS_FAILURE:
+    case orderActions.CREATE_ORDER_FAILURE:
     case orderActions.FETCH_ORDERS_FAILURE: {
       return {
         ...state,

@@ -36,4 +36,7 @@ export default createGlobalStyle`
 .sticky-bottom{
    bottom:0% !important;
 }
+.cursor-pointer{
+   cursor: pointer !important;
+}
 `;
