@@ -6,7 +6,7 @@ import AuthLayout from 'layouts/AuthLayout';
 import BasicPattern from 'components/patterns/BasicPattern';
 import LoadingView from 'components/LoadingView';
 
-import { signIn as signInAction } from 'store/actions';
+import { signIn as signInAction } from 'store/actions/authActions';
 import { connect } from 'react-redux';
 
 import Constants from 'config/Constants';

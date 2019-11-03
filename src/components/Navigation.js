@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-import { signOut as signOutAction } from 'store/actions';
+import { signOut as signOutAction } from 'store/actions/authActions';
 import { connect } from 'react-redux';
 
 import Constants from 'config/Constants';

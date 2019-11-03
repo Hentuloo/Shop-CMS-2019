@@ -1,4 +1,4 @@
-import { commentsActions } from '../actions';
+import { commentsActions } from '../actions/commentsActions';
 
 const initialState = {
   fetched: false,

@@ -1,4 +1,4 @@
-import { authActions } from '../actions';
+import { authActions } from '../actions/authActions';
 
 const initialState = {
   authLoad: false,

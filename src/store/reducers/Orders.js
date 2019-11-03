@@ -1,4 +1,4 @@
-import { orderActions } from '../actions';
+import { orderActions } from '../actions/ordersActions';
 
 const initialState = {
   fetched: false,

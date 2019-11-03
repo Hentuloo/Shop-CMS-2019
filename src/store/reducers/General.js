@@ -1,4 +1,4 @@
-import { generalActions } from '../actions';
+import { generalActions } from '../actions/generalActions';
 
 const initialState = {
   alertActive: false,

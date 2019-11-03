@@ -1,4 +1,4 @@
-import { productActions } from '../actions';
+import { productActions } from '../actions/productActions';
 
 const initialState = {
   fetched: false,

@@ -6,11 +6,9 @@ import { compose } from 'redux';
 
 import LoadingView from 'components/LoadingView';
 
-import {
-  fetchOrders as fetchOrdersAction,
-  fetchProducts as fetchProductsAction,
-  fetchComments as fetchCommentsAction,
-} from 'store/actions';
+import { fetchProducts as fetchProductsAction } from 'store/actions/productActions';
+import { fetchOrders as fetchOrdersAction } from 'store/actions/ordersActions';
+import { fetchComments as fetchCommentsAction } from 'store/actions/commentsActions';
 
 const withData = WrappedComponent => {
   class fetchingComponent extends Component {

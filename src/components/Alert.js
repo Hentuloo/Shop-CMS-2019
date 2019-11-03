@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
 
 import { connect } from 'react-redux';
-import { closeAlert as closeAlertAction } from 'store/actions';
+import { closeAlert as closeAlertAction } from 'store/actions/generalActions';
 
 import Constants from 'config/Constants';
 

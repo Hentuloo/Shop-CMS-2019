@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {
   changeStatus as changeStatusAction,
   deleteOrder as deleteOrderAction,
-} from 'store/actions';
+} from 'store/actions/ordersActions';
 
 import MainLayout from 'layouts/MainLayout';
 import { OrdersTable, OrderDetails } from 'components/OrdersPage';

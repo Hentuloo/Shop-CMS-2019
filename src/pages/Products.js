@@ -7,9 +7,9 @@ import {
   createProduct as createProductAction,
   editProduct as editProductAction,
   deleteProduct as deleteProductAction,
-  setAlert as setAlertAction,
   fetchProducts as fetchProductsAction,
-} from 'store/actions';
+} from 'store/actions/productActions';
+import { setAlert as setAlertAction } from 'store/actions/generalActions';
 
 import MainLayout from 'layouts/MainLayout';
 import {
