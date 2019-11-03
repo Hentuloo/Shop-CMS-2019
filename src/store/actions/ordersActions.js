@@ -42,18 +42,18 @@ export const fetchOrders = () => async (
 
 export const changeStatus = ({ id, status }) => async (
   dispatch,
-  getState,
-  { getFirestore },
+  // getState,
+  // { getFirestore },
 ) => {
   dispatch({
     type: orderActions.CHANGE_STATUS,
   });
   try {
-    const firestore = getFirestore();
-    await firestore
-      .collection('orders')
-      .doc(id)
-      .update({ status });
+    // const firestore = getFirestore();
+    // await firestore
+    //   .collection('orders')
+    //   .doc(id)
+    //   .update({ status });
 
     dispatch({
       type: orderActions.CHANGE_STATUS_SUCCESS,
@@ -70,18 +70,18 @@ export const changeStatus = ({ id, status }) => async (
 };
 export const deleteOrder = ({ id }) => async (
   dispatch,
-  getState,
-  { getFirestore },
+  // getState,
+  // { getFirestore },
 ) => {
   dispatch({
     type: orderActions.DELETE_ORDER,
   });
   try {
-    const firestore = getFirestore();
-    await firestore
-      .collection('orders')
-      .doc(id)
-      .delete();
+    // const firestore = getFirestore();
+    // await firestore
+    //   .collection('orders')
+    //   .doc(id)
+    //   .delete();
 
     dispatch({
       type: orderActions.DELETE_ORDER_SUCCESS,

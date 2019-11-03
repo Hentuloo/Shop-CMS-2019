@@ -44,24 +44,27 @@ export const fetchProducts = () => async (
 };
 export const createProduct = product => async (
   dispatch,
-  getState,
-  { getFirestore },
+  // getState,
+  // { getFirestore },
 ) => {
   dispatch({
     type: productActions.CREATE_PRODUCT,
   });
   try {
-    const firestore = getFirestore();
-    const newDocument = await firestore
-      .collection('products')
-      .add(product);
+    // const firestore = getFirestore();
+    // const newDocument = await firestore
+    //   .collection('products')
+    //   .add(product);
+    // dispatch({
+    //   type: productActions.CREATE_PRODUCT_SUCCESS,
+    //   payload: { ...product, id: newDocument.id },
+    // });
 
     dispatch({
       type: productActions.CREATE_PRODUCT_SUCCESS,
-      payload: { ...product, id: newDocument.id },
+      payload: { ...product, id: Math.floor(Math.random() * 100) },
     });
 
-    // Math.floor(Math.random() * 100), //for dummy data
     return true;
   } catch (error) {
     console.log(error);
@@ -74,18 +77,18 @@ export const createProduct = product => async (
 };
 export const editProduct = product => async (
   dispatch,
-  getState,
-  { getFirestore },
+  // getState,
+  // { getFirestore },
 ) => {
   dispatch({
     type: productActions.EDIT_PRODUCT,
   });
   try {
-    const firestore = getFirestore();
-    await firestore
-      .collection('products')
-      .doc(product.id)
-      .update(product);
+    // const firestore = getFirestore();
+    // await firestore
+    //   .collection('products')
+    //   .doc(product.id)
+    //   .update(product);
 
     dispatch({
       type: productActions.EDIT_PRODUCT_SUCCESS,
@@ -102,18 +105,19 @@ export const editProduct = product => async (
 };
 export const deleteProduct = id => async (
   dispatch,
-  getState,
-  { getFirestore },
+  // getState,
+  // { getFirestore },
 ) => {
   dispatch({
     type: productActions.DELETE_PRODUCT,
   });
   try {
-    const firestore = getFirestore();
-    await firestore
-      .collection('products')
-      .doc(id)
-      .delete();
+    // const firestore = getFirestore();
+    // await firestore
+    //   .collection('products')
+    //   .doc(id)
+    //   .delete();
+
     dispatch({
       type: productActions.DELETE_PRODUCT_SUCCESS,
       payload: { id },
