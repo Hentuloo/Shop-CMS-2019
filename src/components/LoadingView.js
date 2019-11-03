@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { PropTypes } from 'prop-types';
 
-import BasicPattern from 'components/patterns/BasicPattern';
+import { BasicPattern } from 'components/Patterns';
 
 const rotate = keyframes`
     0% {

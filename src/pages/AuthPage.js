@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
 
 import AuthLayout from 'layouts/AuthLayout';
-import BasicPattern from 'components/patterns/BasicPattern';
+import { BasicPattern } from 'components/Patterns';
 import LoadingView from 'components/LoadingView';
 
 import { signIn as signInAction } from 'store/actions/authActions';

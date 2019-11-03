@@ -6,7 +6,13 @@ import { NavLink } from 'react-router-dom';
 import { signOut as signOutAction } from 'store/actions/authActions';
 import { connect } from 'react-redux';
 
+import { withBSecondPatern } from 'components/Patterns';
+
 import Constants from 'config/Constants';
+
+const NavigationWrapper = styled.nav`
+  ${withBSecondPatern}
+`;
 
 const Circle = styled.div`
   width: 45px;
@@ -28,7 +34,7 @@ class Navigation extends Component {
   render() {
     const { className, signOut } = this.props;
     return (
-      <nav
+      <NavigationWrapper
         className={`${className} navbar navbar-expand-md navbar-dark bg-dark px-2`}
       >
         <div className="text-light text-center w-md-100">
@@ -158,7 +164,7 @@ class Navigation extends Component {
             </li>
           </ul>
         </div>
-      </nav>
+      </NavigationWrapper>
     );
   }
 }
