@@ -2,6 +2,7 @@ export default {
   color: {
     info: '#138496',
     white: 'rgb(255, 255, 255)',
+    darken: '#171e26',
   },
   mq: {
     xs: '(min-width: 0px)',

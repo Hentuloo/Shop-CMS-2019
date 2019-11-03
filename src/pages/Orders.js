@@ -201,7 +201,7 @@ class Orders extends Component {
           onChangeStatus={this.handleOnChangeStatus}
           active={orderDetailBarActive}
           data={detailsBar}
-          className="bg-dark border-top border-white pb-5"
+          className="myColors-dark border-top border-white pb-5"
         />
       </MainLayout>
     );

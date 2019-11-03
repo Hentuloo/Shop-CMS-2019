@@ -35,7 +35,7 @@ class Navigation extends Component {
     const { className, signOut } = this.props;
     return (
       <NavigationWrapper
-        className={`${className} navbar navbar-expand-md navbar-dark bg-dark px-2`}
+        className={`${className} myColors-dark navbar navbar-expand-md navbar-dark px-2`}
       >
         <div className="text-light text-center w-md-100">
           <Circle>

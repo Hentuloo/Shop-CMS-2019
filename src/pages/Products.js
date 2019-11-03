@@ -181,7 +181,7 @@ class Products extends Component {
         />
         <StyledProductEditor
           active={editorActive}
-          className="bg-dark border-top border-white"
+          className="myColors-dark border-top border-white"
           activeElement={products.find(
             ({ id }) => id === activeElement,
           )}

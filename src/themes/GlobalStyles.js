@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+  .myColors-dark{
+     background-color: #171e26 !important;
+  }
   .border-width-1{
      border-width: 2px !important;
   }
@@ -41,7 +44,6 @@ export default createGlobalStyle`
 }
 .w-md-75{
    @media ${({ theme }) => theme.mq.md}{
-      
    max-width: 75% !important;
    }
 }
