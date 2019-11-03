@@ -8,7 +8,6 @@ import LoadingView from 'components/LoadingView';
 
 import { fetchProducts as fetchProductsAction } from 'store/actions/productActions';
 import { fetchOrders as fetchOrdersAction } from 'store/actions/ordersActions';
-import { fetchComments as fetchCommentsAction } from 'store/actions/commentsActions';
 
 const withData = WrappedComponent => {
   class fetchingComponent extends Component {
@@ -16,10 +15,8 @@ const withData = WrappedComponent => {
       const {
         ordersFetched,
         productsFetched,
-        commentsFetched,
         fetchOrders,
         fetchProducts,
-        fetchComments,
       } = this.props;
 
       if (!ordersFetched) {
@@ -28,18 +25,11 @@ const withData = WrappedComponent => {
       if (!productsFetched) {
         fetchProducts();
       }
-      if (!commentsFetched) {
-        fetchComments();
-      }
     }
 
     render() {
-      const {
-        ordersFetched,
-        productsFetched,
-        commentsFetched,
-      } = this.props;
-      if (!ordersFetched || !productsFetched || !commentsFetched) {
+      const { ordersFetched, productsFetched } = this.props;
+      if (!ordersFetched || !productsFetched) {
         return <LoadingView />;
       }
 
@@ -49,24 +39,20 @@ const withData = WrappedComponent => {
   fetchingComponent.propTypes = {
     ordersFetched: PropTypes.bool.isRequired,
     productsFetched: PropTypes.bool.isRequired,
-    commentsFetched: PropTypes.bool.isRequired,
     fetchOrders: PropTypes.func.isRequired,
     fetchProducts: PropTypes.func.isRequired,
-    fetchComments: PropTypes.func.isRequired,
   };
   return fetchingComponent;
 };
 
-const mapStateToProps = ({ Orders, Products, Comments }) => ({
+const mapStateToProps = ({ Orders, Products }) => ({
   ordersFetched: Orders.fetched,
   productsFetched: Products.fetched,
-  commentsFetched: Comments.fetched,
   // refers
 });
 const mapDispatchToProps = {
   fetchOrders: fetchOrdersAction,
   fetchProducts: fetchProductsAction,
-  fetchComments: fetchCommentsAction,
 };
 
 const composedWithDataWrapper = compose(
