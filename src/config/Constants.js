@@ -74,6 +74,8 @@ export default {
       pieces: 'Pieces',
       clientComment: 'Client comment: ',
       preference: 'Preference',
+      Address: 'Address: ',
+      Email: 'Email: ',
 
       // products
       productStatus: 'Products status',
@@ -109,6 +111,8 @@ export default {
       readMore: 'Read more...',
 
       // Auth page
+      demoLogin: 'Login: cms@project.eu',
+      demoPassword: 'Password: admin1234',
       demoInformation:
         ' CMS dashboard panel is in the demo phase. You can try that application by logging into test account',
       enterLogin: 'Enter login',

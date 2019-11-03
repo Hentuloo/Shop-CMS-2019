@@ -132,7 +132,7 @@ class OrderDetails extends Component {
                 ),
               )}
           </ImagesWrapper>
-          <div className="form-group mt-2 w-75 mx-auto">
+          <div className="form-group mt-2 w-md-75 mx-auto">
             <ol>
               {products &&
                 products.map(({ id: productID, name, amount }) => (
@@ -151,7 +151,7 @@ class OrderDetails extends Component {
             <select
               name="status"
               value={status}
-              className="custom-select"
+              className="custom-select w-75"
               id="inlineFormCustomSelect"
               onChange={target => this.handleChangeValue(target, id)}
             >
@@ -160,19 +160,27 @@ class OrderDetails extends Component {
               <option value="3">{Constants.en.TEXT.delivered}</option>
             </select>
             <p className="mt-4 mb-0 h4">
+              <small className="text-muted m-0 p-0">
+                {Constants.en.TEXT.Address}
+              </small>
               {address}
-              {' '}
             </p>
             <p className="mt-3 mb-0 h5 text-break">
+              <small className="text-muted m-0 p-0">
+                {Constants.en.TEXT.Email}
+              </small>
               {email}
-              {' '}
             </p>
-            <p className="mt-4 mb-0 h5">
-              {Constants.en.TEXT.clientComment}
-            </p>
-            <p className="mt-1 mb-0 p-2 h5 text-dark bg-light">
-              {clientComment}
-            </p>
+            {clientComment && (
+              <>
+                <p className="mt-4 mb-0 h5">
+                  {Constants.en.TEXT.clientComment}
+                </p>
+                <p className="mt-1 mb-0 p-2 h5 text-dark bg-light w-75 mx-auto">
+                  {clientComment}
+                </p>
+              </>
+            )}
             <p className="mt-2 mb-0 h5">
               {moment(date.data).calendar()}
             </p>

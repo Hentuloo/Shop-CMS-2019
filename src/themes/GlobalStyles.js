@@ -39,4 +39,10 @@ export default createGlobalStyle`
 .cursor-pointer{
    cursor: pointer !important;
 }
+.w-md-75{
+   @media ${({ theme }) => theme.mq.md}{
+      
+   max-width: 75% !important;
+   }
+}
 `;

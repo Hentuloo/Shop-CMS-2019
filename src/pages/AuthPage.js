@@ -114,8 +114,12 @@ class AuthPage extends Component {
             {Constants.en.TEXT.demoInformation}
           </small>
           <p className="blockWrapper__text-mutted text-muted border border-dark rounded p-1 mt-2">
-            <span className="d-block">Login: admin123</span>
-            <span className="d-block">Password: demo123</span>
+            <span className="d-block">
+              {Constants.en.TEXT.demoLogin}
+            </span>
+            <span className="d-block">
+              {Constants.en.TEXT.demoPassword}
+            </span>
           </p>
           <div className="form-group mt-4">
             <input
