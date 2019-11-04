@@ -36,7 +36,7 @@ const ModalProvider = ({
       <div
         className={`${className} ${
           active ? 'd-block' : ''
-        } modal fade show`}
+        } modal fade show `}
         id={target}
         tabIndex="-1"
         role="dialog"
@@ -47,7 +47,7 @@ const ModalProvider = ({
           className="modal-dialog border border-light"
           role="document"
         >
-          <div className="modal-content  bg-dark">
+          <div className="modal-content  myColors-dark">
             <div className="modal-body text-center">{children}</div>
             <div className="modal-footer">
               <button

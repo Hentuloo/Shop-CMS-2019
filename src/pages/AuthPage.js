@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
+import validator from 'validator';
 
 import AuthLayout from 'layouts/AuthLayout';
 import { BasicPattern } from 'components/Patterns';
@@ -75,19 +76,40 @@ class AuthPage extends Component {
   state = {
     login: '',
     password: '',
+    isEmail: true,
+    isPassword: true,
   };
 
   handleChangeInput = e => {
     const { value, name } = e.target;
     const { [name]: stateValue } = this.state;
 
-    if (value !== stateValue) this.setState({ [name]: value });
+    if (value !== stateValue)
+      this.setState({
+        [name]: value,
+        isEmail: true,
+        isPassword: true,
+      });
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const { signIn } = this.props;
-    signIn(this.state);
+    const { login, password } = this.state;
+
+    // check email
+    if (!validator.isEmail(login))
+      return this.setState({ isEmail: false });
+
+    // check password
+    if (
+      !validator.isAlphanumeric(password) &&
+      !validator.isLength(password, { min: 3, max: 15 })
+    ) {
+      return this.setState({ isPassword: false });
+    }
+
+    return signIn({ login, password });
   };
 
   render() {
@@ -99,7 +121,7 @@ class AuthPage extends Component {
     // if (pathname === `${register.path}`) pageType = 'register';
     // if (pathname === `${login.path}`) pageType = 'login';
 
-    const { password, login } = this.state;
+    const { password, login, isEmail, isPassword } = this.state;
     const { authErrorMessage, authLoad } = this.props;
 
     return (
@@ -131,6 +153,11 @@ class AuthPage extends Component {
               onChange={this.handleChangeInput}
               value={login}
             />
+            {!isEmail && (
+              <small className="text-muted d-block text-left w-75 mx-auto my-1 pl-2">
+                Check your email!
+              </small>
+            )}
           </div>
           <div className="form-group">
             <input
@@ -141,6 +168,11 @@ class AuthPage extends Component {
               onChange={this.handleChangeInput}
               value={password}
             />
+            {!isPassword && (
+              <small className="text-muted d-block text-left w-75 mx-auto my-1 pl-2">
+                Check your password! min: 3/chars, max: 15/chars
+              </small>
+            )}
           </div>
           <button
             type="submit"

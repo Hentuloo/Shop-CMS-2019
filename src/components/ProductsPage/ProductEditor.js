@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
+import validator from 'validator';
 
 import Constants from 'config/Constants';
 import ImageController from './ImageController';
@@ -16,9 +17,16 @@ class ProductEditor extends Component {
     index: '',
     name: '',
     price: '',
-    amount: 1,
+    amount: '1',
     details: '',
     images: [],
+    valid: {
+      flag: true,
+      index: true,
+      name: true,
+      price: true,
+      amount: true,
+    },
   };
 
   componentDidUpdate(prevProps) {
@@ -65,14 +73,35 @@ class ProductEditor extends Component {
   handleChangeValue = e => {
     const { value, name } = e.target;
 
-    const { [name]: stateValue } = this.props;
+    const {
+      [name]: stateValue,
+      valid: { flag },
+    } = this.state;
 
     if (value !== stateValue) {
-      this.setState({ [name]: value });
+      // check valid flag
+      if (flag === false) {
+        return this.setState({
+          [name]: value,
+          valid: {
+            flag: true,
+            index: true,
+            name: true,
+            price: true,
+            amount: true,
+          },
+        });
+      }
+
+      return this.setState({ [name]: value });
     }
+    return null;
   };
 
   handleSubmitAction = () => {
+    if (!this.checkValid(['index', 'name', 'price', 'amount']))
+      return null;
+
     const { submitAction } = this.props;
     const {
       id,
@@ -83,7 +112,7 @@ class ProductEditor extends Component {
       details,
       images,
     } = this.state;
-    submitAction({
+    return submitAction({
       id,
       index,
       images,
@@ -92,6 +121,49 @@ class ProductEditor extends Component {
       price,
       details,
     });
+  };
+
+  checkValid = stateNames => {
+    const { valid } = this.state;
+    const newValidObj = valid;
+
+    stateNames.forEach(name => {
+      const { [name]: stateValue } = this.state;
+      switch (name) {
+        case 'index': {
+          if (!validator.isInt(stateValue)) {
+            newValidObj[name] = false;
+            newValidObj.flag = false;
+          }
+          break;
+        }
+        case 'name': {
+          if (!validator.isLength(stateValue, { min: 4, max: 30 })) {
+            newValidObj[name] = false;
+            newValidObj.flag = false;
+          }
+          break;
+        }
+        case 'price': {
+          if (!validator.isFloat(stateValue)) {
+            newValidObj[name] = false;
+            newValidObj.flag = false;
+          }
+          break;
+        }
+        case 'amount': {
+          if (!validator.isInt(stateValue)) {
+            newValidObj[name] = false;
+            newValidObj.flag = false;
+          }
+          break;
+        }
+        default:
+          break;
+      }
+    });
+    this.setState({ valid: newValidObj });
+    return newValidObj.flag;
   };
 
   updateImage = images => {
@@ -107,7 +179,9 @@ class ProductEditor extends Component {
       price,
       details,
       images,
+      valid,
     } = this.state;
+
     return (
       <div
         className={`${className} text-white overflow-auto pb-5 pb-md-2`}
@@ -116,8 +190,8 @@ class ProductEditor extends Component {
           updateImage={this.updateImage}
           images={images}
         />
-        <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
-          <label className="py-2" htmlFor="indexOfProducts">
+        <div className="form-group p-0 my-1 d-flex flex-wrap text-center justify-content-center py-2">
+          <label className="pt-2" htmlFor="indexOfProducts">
             {Constants.en.TEXT.index}
           </label>
           <input
@@ -130,9 +204,15 @@ class ProductEditor extends Component {
             value={index}
             onChange={this.handleChangeValue}
           />
+          {!valid.index && (
+            <small className="text-muted d-block w-100">
+              Only integer values
+            </small>
+          )}
         </div>
-        <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
-          <label className="py-2" htmlFor="nameOfProducts">
+
+        <div className="form-group p-0 my-1 d-flex flex-wrap text-center justify-content-center py-2">
+          <label className="pt-2" htmlFor="nameOfProducts">
             {Constants.en.TEXT.name}
           </label>
           <input
@@ -143,9 +223,14 @@ class ProductEditor extends Component {
             value={name}
             onChange={this.handleChangeValue}
           />
+          {!valid.name && (
+            <small className="text-muted d-block w-100">
+              min: 4/chars, max: 30/chars
+            </small>
+          )}
         </div>
-        <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
-          <label className="py-2" htmlFor="priceOfProduct">
+        <div className="form-group p-0 my-1 d-flex flex-wrap text-center justify-content-center py-2">
+          <label className="pt-2" htmlFor="priceOfProduct">
             {Constants.en.TEXT.price}
           </label>
           <input
@@ -158,11 +243,16 @@ class ProductEditor extends Component {
             value={price}
             onChange={this.handleChangeValue}
           />
-          <span className="py-2">
+          <span className="pt-2">
             {Constants.en.TEXT.monetaryType}
           </span>
+          {!valid.price && (
+            <small className="text-muted d-block w-100">
+              Only decimal values
+            </small>
+          )}
         </div>
-        <div className="form-group p-0 my-1 d-flex text-center justify-content-center">
+        <div className="form-group p-0 my-1 d-flex flex-wrap text-center justify-content-center">
           <label className="py-2" htmlFor="AmountOfProducts">
             {Constants.en.TEXT.Amount}
           </label>
@@ -176,6 +266,11 @@ class ProductEditor extends Component {
             value={amount}
             onChange={this.handleChangeValue}
           />
+          {!valid.amount && (
+            <small className="text-muted d-block w-100">
+              Only integer values
+            </small>
+          )}
         </div>
         <TextareaGroup className="form-group">
           <label htmlFor="textareaDetails">
