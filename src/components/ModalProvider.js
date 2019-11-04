@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { PropTypes } from 'prop-types';
 
 import Constants from 'config/Constants';
+import { withBThirdPatern } from 'components/Patterns';
 
+const ModalContent = styled.div`
+  ${withBThirdPatern}
+`;
 const ModalDialog = styled.div`
   max-width: 100%;
   top: 14%;
@@ -47,7 +51,7 @@ const ModalProvider = ({
           className="modal-dialog border border-light"
           role="document"
         >
-          <div className="modal-content  myColors-dark">
+          <ModalContent className="modal-content myColors-dark">
             <div className="modal-body text-center">{children}</div>
             <div className="modal-footer">
               <button
@@ -59,7 +63,7 @@ const ModalProvider = ({
                 {Constants.en.TEXT.close}
               </button>
             </div>
-          </div>
+          </ModalContent>
         </ModalDialog>
       </div>
     );

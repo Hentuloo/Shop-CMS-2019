@@ -22,3 +22,6 @@ export const withBasicPatterm = css`
 export const withBSecondPatern = css`
   background-image: url('/images/patternImage2.png');
 `;
+export const withBThirdPatern = css`
+  background-image: url('/images/patternImage3.png');
+`;
