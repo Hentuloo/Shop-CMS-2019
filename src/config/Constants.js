@@ -85,6 +85,7 @@ export default {
       lastStatus: 'Last',
       twoLastStatus: '2-last',
       newProduct: 'Add new product',
+      filterSettings: 'Filter settings',
 
       // products-table
       collImage: 'Image',
@@ -106,6 +107,17 @@ export default {
       buttonNew: 'Create product',
       monetaryType: '$(usd)',
 
+      productsTableSettings: {
+        image: 'Image',
+        name: 'Name',
+        price: 'Price',
+        amount: 'Amount',
+        description: 'Description',
+        operations: 'Operations',
+        filter: 'Last copies',
+        filterBuyed: 'Filter by purchased',
+      },
+
       // comments
       lastComments: 'Last comments:',
       readMore: 'Read more...',
@@ -118,6 +130,8 @@ export default {
       enterLogin: 'Enter login',
       enterPassword: 'Enter password',
       submitButton: 'SUBMIT',
+
+      productFilter: 'Find your product...',
     },
   },
 };

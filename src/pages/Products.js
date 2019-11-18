@@ -15,10 +15,19 @@ import MainLayout from 'layouts/MainLayout';
 import {
   ProductsTable,
   ProductEditor,
+  FilterInput,
+  Controlers,
+  TableSettings,
 } from 'components/ProductsPage';
 
-import Constants from 'config/Constants';
-
+const ControlsAndFilterWrapper = styled.div`
+  @media ${({ theme }) => theme.mq.lg} {
+    display: flex;
+    width: 90%;
+    flex-flow: column-reverse;
+    margin: 20px auto;
+  }
+`;
 const EditorBarButton = styled.button`
   position: fixed;
   right: 0%;
@@ -26,6 +35,7 @@ const EditorBarButton = styled.button`
   border-radius: 0px;
   padding-right: 20px;
   font-size: 1.6rem;
+  z-index: 20;
   @media ${({ theme }) => theme.mq.md} {
     top: 3%;
   }
@@ -65,6 +75,17 @@ class Products extends Component {
   state = {
     editorActive: false,
     activeElement: undefined,
+    filterValue: '',
+    tableSettings: {
+      checkboxVisible: false,
+      image: true,
+      name: true,
+      price: true,
+      amount: true,
+      description: true,
+      operations: true,
+      last: false,
+    },
   };
 
   componentDidMount() {
@@ -85,6 +106,51 @@ class Products extends Component {
     }
   }
 
+  handleInput = e => {
+    const { value, name } = e.target;
+    const { [name]: stateValue } = this.state;
+    if (value !== stateValue) {
+      this.setState({
+        [name]: value,
+      });
+    }
+  };
+
+  handleResetFilter = () => {
+    this.setState({ filterValue: '' });
+  };
+
+  handleTableSettingsBtn = () => {
+    this.setState(prevState => {
+      return {
+        tableSettings: {
+          checkboxVisible: !prevState.tableSettings.checkboxVisible,
+          image: true,
+          name: true,
+          price: true,
+          amount: true,
+          description: true,
+          operations: true,
+          last: false,
+        },
+      };
+    });
+  };
+
+  handleChangeTableSetting = e => {
+    const { name, checked } = e.target;
+    const { tableSettings } = this.state;
+
+    const newtableSettings = {
+      ...tableSettings,
+      [name]: checked,
+    };
+
+    this.setState({
+      tableSettings: newtableSettings,
+    });
+  };
+
   handleChangeFlagEditor = () => {
     this.setState(prevState => {
       return { editorActive: !prevState.editorActive };
@@ -101,7 +167,10 @@ class Products extends Component {
   };
 
   handleClickNewBtn = () => {
-    this.setState({ editorActive: true, activeElement: undefined });
+    this.setState({
+      editorActive: true,
+      activeElement: undefined,
+    });
   };
 
   handleClickDeleteBtn = id => {
@@ -111,73 +180,86 @@ class Products extends Component {
         orderProducts.find(({ productId }) => productId === id),
       )
     ) {
-      return setAlert({ type: 'checkProductsInOrdersTab' });
+      return setAlert({
+        type: 'checkProductsInOrdersTab',
+      });
     }
     return deleteProduct(id);
   };
 
-  handleProductEditorAccept = async ({
-    id,
-    index,
-    images,
-    name,
-    price,
-    amount,
-    details,
-  }) => {
+  handleProductEditorAccept = async product => {
+    const { id } = product;
     const { createProduct, editProduct } = this.props;
 
     if (id) {
       // edit product
-      const callBackStatus = await editProduct({
-        id,
-        index,
-        images,
-        name,
-        price,
-        amount,
-        details,
-      });
+      const callBackStatus = await editProduct(product);
       if (callBackStatus) this.handleChangeFlagEditor();
       return;
     }
     // create product
-    const callBackStatus = await createProduct({
-      index,
-      images,
-      name,
-      price,
-      amount,
-      details,
-    });
+    const callBackStatus = await createProduct(product);
     if (callBackStatus) this.handleChangeFlagEditor();
   };
 
   render() {
     const { products } = this.props;
-    const { editorActive, activeElement } = this.state;
+    const {
+      editorActive,
+      activeElement,
+      filterValue,
+      tableSettings,
+    } = this.state;
+
+    const { checkboxVisible } = tableSettings;
+
+    const filteredProducts = () => {
+      if (filterValue === '') return products;
+
+      return products.filter(({ name, details }) => {
+        if (
+          name &&
+          name.toLowerCase().includes(filterValue.toLowerCase())
+        ) {
+          return true;
+        }
+        if (
+          details &&
+          details.toLowerCase().includes(filterValue.toLowerCase())
+        ) {
+          return true;
+        }
+        return false;
+      });
+    };
+
     return (
       <MainLayout>
-        <div className="row pt-3">
-          <div className="col-6 col-md-3">
-            <button
-              onClick={() => this.handleClickNewBtn()}
-              type="button"
-              className="btn bg-light d-flex flex-column align-items-center"
-            >
-              <span
-                className="fa fa-plus display-1"
-                aria-hidden="true"
-              />
-              <span>{Constants.en.TEXT.newProduct}</span>
-            </button>
-          </div>
-        </div>
+        <ControlsAndFilterWrapper>
+          <Controlers
+            onClickNewItem={this.handleClickNewBtn}
+            onClickTableEdit={this.handleTableSettingsBtn}
+          />
+          {checkboxVisible && (
+            <TableSettings
+              settings={tableSettings}
+              onToggle={this.handleChangeTableSetting}
+            />
+          )}
+          <FilterInput
+            name="filterValue"
+            handleInput={this.handleInput}
+            resetFilter={this.handleResetFilter}
+            inputValue={filterValue}
+          />
+        </ControlsAndFilterWrapper>
         <ProductsTable
           className=""
-          products={products}
+          products={filteredProducts()}
           onClickEditBtn={this.handleClickEditBtn}
           onClickDeleteBtn={this.handleClickDeleteBtn}
+          filterValue={filterValue}
+          tableSettings={tableSettings}
         />
         <StyledProductEditor
           active={editorActive}

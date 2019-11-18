@@ -4,11 +4,25 @@ import { PropTypes } from 'prop-types';
 import validator from 'validator';
 
 import Constants from 'config/Constants';
+import InputWithLabel from 'components/InputWithLabel';
 import ImageController from './ImageController';
 
 const TextareaGroup = styled.div`
   width: 80%;
   margin: 0px auto;
+  font-weight: bold;
+  font-size: 18px;
+`;
+const Wrapper = styled.div`
+  z-index: 10;
+`;
+const StyledNameInput = styled(InputWithLabel)`
+  width: 70%;
+  text-align:left
+  }
+`;
+const StyledQuantityInput = styled(InputWithLabel)`
+  min-width: 230px;
 `;
 
 class ProductEditor extends Component {
@@ -17,7 +31,7 @@ class ProductEditor extends Component {
     index: '',
     name: '',
     price: '',
-    amount: '1',
+    amount: '',
     details: '',
     images: [],
     valid: {
@@ -183,7 +197,7 @@ class ProductEditor extends Component {
     } = this.state;
 
     return (
-      <div
+      <Wrapper
         className={`${className} text-white overflow-auto pb-5 pb-md-2`}
       >
         <ImageController
@@ -191,16 +205,15 @@ class ProductEditor extends Component {
           images={images}
         />
         <div className="form-group p-0 my-1 d-flex flex-wrap text-center justify-content-center py-2">
-          <label className="pt-2" htmlFor="indexOfProducts">
-            {Constants.en.TEXT.index}
-          </label>
-          <input
+          <InputWithLabel
+            className=""
             name="index"
-            min="1"
-            max="999999"
             type="number"
-            className="form-control number w-auto ml-2"
-            id="indexOfProducts"
+            specialAttr={{
+              min: '1',
+              max: '999999',
+            }}
+            placeholder={Constants.en.TEXT.index}
             value={index}
             onChange={this.handleChangeValue}
           />
@@ -210,16 +223,13 @@ class ProductEditor extends Component {
             </small>
           )}
         </div>
-
-        <div className="form-group p-0 my-1 d-flex flex-wrap text-center justify-content-center py-2">
-          <label className="pt-2" htmlFor="nameOfProducts">
-            {Constants.en.TEXT.name}
-          </label>
-          <input
+        <div className="form-group p-0 mb-1 mt-3 d-flex flex-wrap text-center justify-content-center py-2">
+          <StyledNameInput
+            className=""
             name="name"
             type="text"
-            className="form-control w-auto ml-1"
-            id="nameOfProducts"
+            direction="fromTop"
+            placeholder={Constants.en.TEXT.name}
             value={name}
             onChange={this.handleChangeValue}
           />
@@ -230,16 +240,15 @@ class ProductEditor extends Component {
           )}
         </div>
         <div className="form-group p-0 my-1 d-flex flex-wrap text-center justify-content-center py-2">
-          <label className="pt-2" htmlFor="priceOfProduct">
-            {Constants.en.TEXT.price}
-          </label>
-          <input
+          <InputWithLabel
+            className="number w-auto ml-2"
             name="price"
-            min="1"
-            step="any"
             type="number"
-            className="form-control number w-auto ml-2"
-            id="priceOfProduct"
+            specialAttr={{
+              min: '1',
+              max: '999999',
+            }}
+            placeholder={Constants.en.TEXT.price}
             value={price}
             onChange={this.handleChangeValue}
           />
@@ -252,17 +261,17 @@ class ProductEditor extends Component {
             </small>
           )}
         </div>
-        <div className="form-group p-0 my-1 d-flex flex-wrap text-center justify-content-center">
-          <label className="py-2" htmlFor="AmountOfProducts">
-            {Constants.en.TEXT.Amount}
-          </label>
-          <input
+        <div className="form-group p-0 mb-1 mt-4 d-flex flex-wrap text-center justify-content-center py-2">
+          <StyledQuantityInput
+            className="number"
             name="amount"
-            min="1"
-            max="999999"
             type="number"
-            className="form-control number w-auto ml-2"
-            id="AmountOfProducts"
+            direction="fromTop"
+            specialAttr={{
+              min: '1',
+              max: '999999',
+            }}
+            placeholder={Constants.en.TEXT.Amount}
             value={amount}
             onChange={this.handleChangeValue}
           />
@@ -272,6 +281,7 @@ class ProductEditor extends Component {
             </small>
           )}
         </div>
+
         <TextareaGroup className="form-group">
           <label htmlFor="textareaDetails">
             {Constants.en.TEXT.Details}
@@ -287,14 +297,14 @@ class ProductEditor extends Component {
         </TextareaGroup>
         <button
           type="button"
-          className="btn btn-info d-block mx-auto mt-3 py-2 px-4"
+          className="btn btn-info d-block mx-auto mt-3 mb-4 py-2 px-4"
           onClick={this.handleSubmitAction}
         >
           {activeElement === undefined
             ? Constants.en.TEXT.buttonNew
             : Constants.en.TEXT.buttonEdit}
         </button>
-      </div>
+      </Wrapper>
     );
   }
 }

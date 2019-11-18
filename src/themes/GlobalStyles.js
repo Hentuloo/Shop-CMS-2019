@@ -47,4 +47,18 @@ export default createGlobalStyle`
    max-width: 75% !important;
    }
 }
+.form-control:focus{
+   border-color: inherit !important;
+   box-shadow: none !important;
+}
+.custom-control-label:before{
+  background-color:transparent;
+  border-color:black !important;
+}
+.custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0px 0px 2px 1px black !important;
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+  background-color:black;
+}
 `;

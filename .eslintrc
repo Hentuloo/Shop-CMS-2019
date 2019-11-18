@@ -22,8 +22,9 @@
       "experimentalObjectRestSpread": true
     }
   },
-  "plugins": ["react"],
+  "plugins": ["react", "prettier"],
   "rules": {
+    "jsx-a11y/label-has-associated-control": 0,
     "class-methods-use-this": 1,
     "jsx-a11y/no-noninteractive-element-to-interactive-role": 1,
     "react/no-array-index-key": 1,
@@ -37,6 +38,7 @@
       {
         "extensions": [".js", ".jsx"]
       }
-    ]
+    ],
+    "prettier/prettier": "error"
   }
 }
