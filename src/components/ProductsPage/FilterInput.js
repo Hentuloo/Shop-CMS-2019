@@ -21,10 +21,6 @@ const FilterInput = ({ handleInput, inputValue, resetFilter }) => {
   return (
     <Wrapper className="px-1 pb-3">
       <div className="d-flex">
-        <span
-          className="fa fa-search rounded myColors-dark h5 text-white px-2 pb-2 pt-2 d-none d-md-block"
-          aria-hidden="true"
-        />
         <InputWithLabel
           className="mb-1 w-100 px-2 px-md-2"
           black

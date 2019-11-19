@@ -5,6 +5,15 @@ import { PropTypes } from 'prop-types';
 import Constants from 'config/Constants';
 import { withBThirdPatern } from 'components/Patterns';
 
+const Wrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  background-color: ${({ theme }) => theme.color.black[0]};
+  z-index: 24;
+`;
 const ModalContent = styled.div`
   ${withBThirdPatern}
 `;
@@ -37,35 +46,37 @@ const ModalProvider = ({
 }) => {
   if (active) {
     return (
-      <div
-        className={`${className} ${
-          active ? 'd-block' : ''
-        } modal fade show `}
-        id={target}
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby={title}
-        aria-hidden="true"
-      >
-        <ModalDialog
-          className="modal-dialog border border-light"
-          role="document"
+      <Wrapper>
+        <div
+          className={`${className} ${
+            active ? 'd-block' : ''
+          } modal fade show `}
+          id={target}
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby={title}
+          aria-hidden="true"
         >
-          <ModalContent className="modal-content myColors-dark">
-            <div className="modal-body text-center">{children}</div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-info text-uppercase font-weight-bold"
-                data-dismiss="modal"
-                onClick={onClose}
-              >
-                {Constants.en.TEXT.close}
-              </button>
-            </div>
-          </ModalContent>
-        </ModalDialog>
-      </div>
+          <ModalDialog
+            className="modal-dialog border border-light"
+            role="document"
+          >
+            <ModalContent className="modal-content myColors-dark">
+              <div className="modal-body text-center">{children}</div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-info text-uppercase font-weight-bold"
+                  data-dismiss="modal"
+                  onClick={onClose}
+                >
+                  {Constants.en.TEXT.close}
+                </button>
+              </div>
+            </ModalContent>
+          </ModalDialog>
+        </div>
+      </Wrapper>
     );
   }
   return null;

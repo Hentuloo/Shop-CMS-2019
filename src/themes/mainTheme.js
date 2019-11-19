@@ -3,6 +3,7 @@ export default {
     info: '#138496',
     white: 'rgb(255, 255, 255)',
     darken: '#171e26',
+    black: ['rgba(23,30,38,0.85)'],
   },
   mq: {
     xs: '(min-width: 0px)',
